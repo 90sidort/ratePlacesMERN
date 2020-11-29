@@ -9,6 +9,7 @@ import {
 import Users from "./users/containers/Users";
 import NewPlace from "./places/containers/NewPlace";
 import MainNavigation from "./shared/components/navigation/MainNavigation";
+import UserPlaces from "./places/containers/UserPlaces";
 
 const App = () => {
   return (
@@ -18,6 +19,9 @@ const App = () => {
         <Switch>
           <Route path="/" exact={true}>
             <Users />
+          </Route>
+          <Route path="/:userId/places" exact={true}>
+            <UserPlaces />
           </Route>
           <Route path="/places/new" exact={true}>
             <NewPlace />
