@@ -15,6 +15,7 @@ const PLACES = [
       lng: -73.9878584,
     },
     creator: "u1",
+    address: "20 W 34th St, New York, NY 10001, United States",
   },
   {
     id: "p2",
@@ -27,6 +28,7 @@ const PLACES = [
       lng: 14.55971,
     },
     creator: "u2",
+    address: "Zygmunta Starego 1A, 71-899 Szczecin, Poland",
   },
 ];
 
