@@ -63,10 +63,11 @@ const Input = (props) => {
         id={props.id}
         rows={props.rows || 3}
         onChange={changeHandler}
-        value={inputState.value}
         onBlur={touchHandler}
+        value={inputState.value}
       />
     );
+
   return (
     <div
       className={`form-control ${

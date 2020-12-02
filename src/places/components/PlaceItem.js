@@ -9,8 +9,15 @@ import "./PlaceItem.css";
 
 const PlaceItem = (props) => {
   const [showMap, setShowMap] = useState(false);
+  const [showConfirmModal, setShowConfirmModale] = useState(false);
   const openMapHandler = () => setShowMap(true);
   const closeMapHandler = () => setShowMap(false);
+  const showModalHandler = () => setShowConfirmModale(true);
+  const cancelModalHandler = () => setShowConfirmModale(false);
+  const deleteModalHandler = () => {
+    setShowConfirmModale(false);
+    console.log("DELETE");
+  };
 
   console.log(props);
 
@@ -31,6 +38,24 @@ const PlaceItem = (props) => {
             />
           </div>
         </Modal>
+        <Modal
+          show={showConfirmModal}
+          onCancel={cancelModalHandler}
+          header="Please confirm."
+          footerClass="place-item__modal-actions"
+          footer={
+            <React.Fragment>
+              <Button inverse onClick={cancelModalHandler}>
+                CANCEL
+              </Button>
+              <Button danger onClick={deleteModalHandler}>
+                DELETE
+              </Button>
+            </React.Fragment>
+          }
+        >
+          <p>Please confirm deletetion.</p>
+        </Modal>
         <Card className="place-item__content">
           <div className="place-item__image">
             <img src={props.image} alt={props.title} />
@@ -45,7 +70,9 @@ const PlaceItem = (props) => {
               VIEW ON MAP
             </Button>
             <Button to={`/places/${props.id}`}>EDIT</Button>
-            <Button danger>DELETE</Button>
+            <Button danger onClick={showModalHandler}>
+              DELETE
+            </Button>
           </div>
         </Card>
       </li>
