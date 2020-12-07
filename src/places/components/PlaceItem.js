@@ -12,10 +12,13 @@ const PlaceItem = (props) => {
   const auth = useContext(AuthContext);
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModale] = useState(false);
+  const [showReviewModal, setShowRevieModal] = useState(false);
   const openMapHandler = () => setShowMap(true);
   const closeMapHandler = () => setShowMap(false);
   const showModalHandler = () => setShowConfirmModale(true);
   const cancelModalHandler = () => setShowConfirmModale(false);
+  const showReviewModalHandler = () => setShowRevieModal(true);
+  const cancelReviewModalHandler = () => setShowRevieModal(false);
   const deleteModalHandler = () => {
     setShowConfirmModale(false);
     console.log("DELETE");
@@ -58,6 +61,21 @@ const PlaceItem = (props) => {
         >
           <p>Please confirm deletetion.</p>
         </Modal>
+        <Modal
+          show={showReviewModal}
+          onCancel={cancelReviewModalHandler}
+          header="Review"
+          footerClass="place-item__modal-actions"
+          footer={
+            <React.Fragment>
+              <Button inverse onClick={cancelReviewModalHandler}>
+                CLOSE
+              </Button>
+            </React.Fragment>
+          }
+        >
+          <p>Very good, would recommend.</p>
+        </Modal>
         <Card className="place-item__content">
           <div className="place-item__image">
             <img src={props.image} alt={props.title} />
@@ -70,6 +88,9 @@ const PlaceItem = (props) => {
           <div className="place-item__actions">
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
+            </Button>
+            <Button inverse onClick={showReviewModalHandler}>
+              REVIEW
             </Button>
             {auth.isLoggedIn && (
               <Button to={`/places/${props.id}`}>EDIT</Button>
