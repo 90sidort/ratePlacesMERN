@@ -12,14 +12,14 @@ import {
   VALIDATOR_REQUIRE,
 } from "../../shared/utils/validators";
 import { AuthContext } from "../../shared/context/auth-context";
+import { useHttp } from "../../shared/hooks/http-hook";
 
 import "./Auth.css";
 
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isAuth, setIsAuth] = useState(true);
-  const [isLoading, setLoading] = useState(false);
-  const [isError, setError] = useState();
+  const { isLoading, isError, sendRequest, clearError } = useHttp();
   const [formState, inputHandler, setFormData] = useForm(
     {
       email: { value: "", isValid: false },
@@ -51,58 +51,39 @@ const Auth = () => {
 
   const authSubmitHandler = async (e) => {
     e.preventDefault();
-    setLoading(true);
     if (isAuth) {
       try {
-        const response = await fetch("http://localhost:5000/api/users/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/login",
+          "POST",
+          JSON.stringify({
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
-        });
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(responseData.message);
-        }
-        setLoading(false);
-        auth.login();
-      } catch (e) {
-        setLoading(false);
-        setError(e.message || "Server error");
-      }
+          { "Content-Type": "application/json" }
+        );
+        auth.login(responseData.user.id);
+      } catch (e) {}
     } else {
       try {
-        const response = await fetch("http://localhost:5000/api/users/signup", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/signup",
+          "POST",
+          JSON.stringify({
             name: formState.inputs.name.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
-        });
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(responseData.message);
-        }
-        setLoading(false);
-        auth.login();
-      } catch (e) {
-        setLoading(false);
-        setError(e.message || "Server error");
-      }
+          { "Content-Type": "application/json" }
+        );
+        auth.login(responseData.user.id);
+      } catch (e) {}
     }
-  };
-
-  const errorHandler = () => {
-    setError(null);
   };
 
   return (
     <React.Fragment>
-      <ErrorModal error={isError} onClear={errorHandler} />
+      <ErrorModal error={isError} onClear={clearError} />
       <Card className="authentication">
         {isLoading && <LoadingSpinner asOverlay />}
         <form onSubmit={authSubmitHandler}>
