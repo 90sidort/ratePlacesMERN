@@ -5,11 +5,15 @@ import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/components/UIElements/Modal";
 import MapboxGLMap from "../../shared/components/UIElements/Map";
 import { AuthContext } from "../../shared/context/auth-context";
+import { useHttp } from "../../shared/hooks/http-hook";
 
 import "./PlaceItem.css";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 const PlaceItem = (props) => {
   const auth = useContext(AuthContext);
+  const { isLoading, isError, sendRequest, clearError } = useHttp();
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModale] = useState(false);
   const [showReviewModal, setShowRevieModal] = useState(false);
@@ -19,15 +23,22 @@ const PlaceItem = (props) => {
   const cancelModalHandler = () => setShowConfirmModale(false);
   const showReviewModalHandler = () => setShowRevieModal(true);
   const cancelReviewModalHandler = () => setShowRevieModal(false);
-  const deleteModalHandler = () => {
+  const deleteModalHandler = async () => {
     setShowConfirmModale(false);
-    console.log("DELETE");
+    try {
+      await sendRequest(
+        `http://localhost:5000/api/places/${props.id}`,
+        "DELETE"
+      );
+      props.onDelete(props.id);
+    } catch (e) {}
   };
 
-  console.log(props);
+  console.log(props.image);
 
   return (
     <React.Fragment>
+      <ErrorModal error={isError} onClear={clearError} />
       <li className="place-item">
         <Modal
           show={showMap}
@@ -77,6 +88,7 @@ const PlaceItem = (props) => {
           <p>Very good, would recommend.</p>
         </Modal>
         <Card className="place-item__content">
+          {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image">
             <img src={props.image} alt={props.title} />
           </div>
@@ -92,10 +104,10 @@ const PlaceItem = (props) => {
             <Button inverse onClick={showReviewModalHandler}>
               REVIEW
             </Button>
-            {auth.isLoggedIn && (
+            {auth.userId === props.creatorId && (
               <Button to={`/places/${props.id}`}>EDIT</Button>
             )}
-            {auth.isLoggedIn && (
+            {auth.userId === props.creatorId && (
               <Button danger onClick={showModalHandler}>
                 DELETE
               </Button>

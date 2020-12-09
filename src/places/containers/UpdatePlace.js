@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
 
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
@@ -10,39 +10,17 @@ import {
 import { useForm } from "../../shared/hooks/form-hook";
 import "./PlaceForm.css";
 import Card from "../../shared/components/UIElements/Card";
-
-const PLACES = [
-  {
-    id: "p1",
-    title: "Empire State Building",
-    description: "One of the most famous sky scrappers in the world",
-    imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/1/10/Empire_State_Building_%28aerial_view%29.jpg",
-    address: "20 W 34th St, New York, NY 10001, United States",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878584,
-    },
-    creator: "u1",
-  },
-  {
-    id: "p2",
-    title: "Orthodox Church of St. Nicholas",
-    description: "Orthodox Church in Szczecin",
-    imageUrl:
-      "https://thumbs.dreamstime.com/z/orthodox-parish-st-nicholas-altar-b-poland-szczecin-june-63083420.jpg",
-    address: "Zygmunta Starego 1A, 71-899 Szczecin, Poland",
-    location: {
-      lat: 53.430453,
-      lng: 14.55971,
-    },
-    creator: "u2",
-  },
-];
+import { useHttp } from "../../shared/hooks/http-hook";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const UpdatePlace = () => {
+  const auth = useContext(AuthContext);
+  const { isLoading, isError, sendRequest, clearError } = useHttp();
   const placeId = useParams().placeId;
-  const [isLoading, setIsLoading] = useState(true);
+  const [fetchedPlace, updatefetchedPlace] = useState(undefined);
+  const history = useHistory();
   const [formState, inputHandler, setFormData] = useForm(
     {
       title: {
@@ -54,29 +32,48 @@ const UpdatePlace = () => {
     false
   );
 
-  const getPlace = PLACES.find((place) => place.id === placeId);
-
   useEffect(() => {
-    if (getPlace) {
-      setFormData(
-        {
-          title: {
-            value: getPlace.title,
-            isValid: true,
+    const fetchPlace = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:5000/api/places/${placeId}`
+        );
+        updatefetchedPlace(responseData.place);
+        setFormData(
+          {
+            title: {
+              value: responseData.place.title,
+              isValid: true,
+            },
+            description: {
+              value: responseData.place.description,
+              isValid: true,
+            },
           },
-          description: { value: getPlace.description, isValid: true },
-        },
-        true
-      );
-    }
-    setIsLoading(false);
-  }, [setFormData, getPlace]);
+          true
+        );
+      } catch (e) {}
+    };
+    fetchPlace();
+  }, [placeId, sendRequest, setFormData]);
 
-  const placeUpdateSubmitHandler = (e) => {
+  const placeUpdateSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log(formState.inputs);
+    try {
+      await sendRequest(
+        `http://localhost:5000/api/places/${placeId}`,
+        "PATCH",
+        JSON.stringify({
+          title: formState.inputs.title.value,
+          description: formState.inputs.description.value,
+        }),
+        { "Content-Type": "application/json" }
+      );
+      history.push(`/${auth.userId}/places`);
+    } catch (e) {}
   };
-  if (!getPlace) {
+
+  if (!fetchedPlace && !isError) {
     return (
       <div className="center">
         <Card>
@@ -86,41 +83,43 @@ const UpdatePlace = () => {
     );
   }
 
-  if (isLoading) {
-    return (
-      <div className="center">
-        <h2>Loading...</h2>
-      </div>
-    );
-  }
-  console.log(formState);
   return (
-    <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
-      <Input
-        id="title"
-        element="input"
-        type="text"
-        label="Title"
-        validators={[VALIDATOR_REQUIRE()]}
-        errorText="Please enter a valid title."
-        onInput={inputHandler}
-        initialValue={formState.inputs.title.value}
-        initialValid={formState.inputs.title.isValid}
-      />
-      <Input
-        id="description"
-        label="Description"
-        element="textarea"
-        validators={[VALIDATOR_MINLENGTH(5)]}
-        errorText="Please enter a valid description (at least 5 characters)."
-        onInput={inputHandler}
-        initialValue={formState.inputs.description.value}
-        initialValid={formState.inputs.description.isValid}
-      />
-      <Button type="submit" disabled={!formState.isValid}>
-        UPDATE PLACE
-      </Button>
-    </form>
+    <React.Fragment>
+      {isLoading && (
+        <div className="center">
+          <LoadingSpinner asOverlay />
+        </div>
+      )}
+      <ErrorModal error={isError} onClear={clearError} />
+      {!isLoading && fetchedPlace && (
+        <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
+          <Input
+            id="title"
+            element="input"
+            type="text"
+            label="Title"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter a valid title."
+            onInput={inputHandler}
+            initialValue={fetchedPlace.title}
+            initialValid={true}
+          />
+          <Input
+            id="description"
+            label="Description"
+            element="textarea"
+            validators={[VALIDATOR_MINLENGTH(5)]}
+            errorText="Please enter a valid description (at least 5 characters)."
+            onInput={inputHandler}
+            initialValue={fetchedPlace.description}
+            initialValid={true}
+          />
+          <Button type="submit" disabled={!formState.isValid}>
+            UPDATE PLACE
+          </Button>
+        </form>
+      )}
+    </React.Fragment>
   );
 };
 
