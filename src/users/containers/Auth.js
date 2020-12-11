@@ -15,6 +15,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import { useHttp } from "../../shared/hooks/http-hook";
 
 import "./Auth.css";
+import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 
 const Auth = () => {
   const auth = useContext(AuthContext);
@@ -34,6 +35,7 @@ const Auth = () => {
         {
           ...formState.inputs,
           name: undefined,
+          image: undefined,
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
@@ -42,6 +44,7 @@ const Auth = () => {
         {
           ...formState.inputs,
           name: { value: "", isValid: false },
+          image: { value: null, isValid: false },
         },
         false
       );
@@ -98,6 +101,7 @@ const Auth = () => {
               onInput={inputHandler}
             />
           )}
+          {!isAuth && <ImageUpload id="image" center onInput={inputHandler} />}
           <Input
             id="email"
             type="text"
