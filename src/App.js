@@ -20,7 +20,6 @@ const App = () => {
 
   const login = useCallback((uid) => {
     setIsLoggedIn(true);
-    console.log(uid);
     setUserId(uid);
   }, []);
 
