@@ -6,7 +6,6 @@ import Button from "../../shared/components/FormElements/Button";
 import "./PlaceList.css";
 
 const PlaceList = (props) => {
-  console.log(typeof props.places);
   if (props.places.length === 0) {
     return (
       <div className="place-list center">

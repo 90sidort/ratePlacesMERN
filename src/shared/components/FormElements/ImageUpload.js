@@ -6,7 +6,7 @@ import "./ImageUpload.css";
 const ImageUpload = (props) => {
   const [file, setFile] = useState();
   const [previewURL, setPreviewUrl] = useState();
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(true);
   const filePickerRef = useRef();
 
   useEffect(() => {
@@ -30,16 +30,14 @@ const ImageUpload = (props) => {
     if (e.target.files && e.target.files.length === 1) {
       pickedFile = e.target.files[0];
       setFile(pickedFile);
-      setIsValid(true);
-      fileIsValid = true;
     } else {
-      setIsValid(false);
-      fileIsValid = false;
+      setFile("placeholder");
     }
+    setIsValid(true);
+    fileIsValid = true;
     props.onInput(props.id, pickedFile, fileIsValid);
   };
 
-  console.log(props);
   return (
     <div className="form-control">
       <input

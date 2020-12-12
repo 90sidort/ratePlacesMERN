@@ -34,8 +34,6 @@ const PlaceItem = (props) => {
     } catch (e) {}
   };
 
-  console.log(props.image);
-
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />
@@ -91,7 +89,11 @@ const PlaceItem = (props) => {
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image">
             <img
-              src={`http://localhost:5000/${props.image}`}
+              src={
+                props.image !== "placeholder"
+                  ? `http://localhost:5000/${props.image}`
+                  : `http://localhost:5000/uploads/images/tundra.jpg`
+              }
               alt={props.title}
             />
           </div>

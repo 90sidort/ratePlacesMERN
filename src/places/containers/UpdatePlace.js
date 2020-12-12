@@ -58,6 +58,8 @@ const UpdatePlace = () => {
   }, [placeId, sendRequest, setFormData]);
 
   const placeUpdateSubmitHandler = async (e) => {
+    console.log("kucyk");
+    console.log(fetchedPlace.image);
     e.preventDefault();
     try {
       await sendRequest(
@@ -72,6 +74,8 @@ const UpdatePlace = () => {
       history.push(`/${auth.userId}/places`);
     } catch (e) {}
   };
+
+  console.log(fetchedPlace);
 
   if (!fetchedPlace && !isError) {
     return (
