@@ -14,6 +14,7 @@ import { useHttp } from "../../shared/hooks/http-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import { AuthContext } from "../../shared/context/auth-context";
+import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 
 const UpdatePlace = () => {
   const auth = useContext(AuthContext);
@@ -28,6 +29,7 @@ const UpdatePlace = () => {
         isValid: false,
       },
       description: { value: "", isValid: false },
+      image: { value: null, isValid: true },
     },
     false
   );
@@ -62,14 +64,17 @@ const UpdatePlace = () => {
     console.log(fetchedPlace.image);
     e.preventDefault();
     try {
+      const formData = new FormData();
+      formData.append("title", formState.inputs.title.value);
+      formData.append("description", formState.inputs.description.value);
+      formData.append(
+        "image",
+        formState.inputs.image ? formState.inputs.image.value : "leave"
+      );
       await sendRequest(
         `http://localhost:5000/api/places/${placeId}`,
         "PATCH",
-        JSON.stringify({
-          title: formState.inputs.title.value,
-          description: formState.inputs.description.value,
-        }),
-        { "Content-Type": "application/json" }
+        formData
       );
       history.push(`/${auth.userId}/places`);
     } catch (e) {}
@@ -117,6 +122,13 @@ const UpdatePlace = () => {
             onInput={inputHandler}
             initialValue={fetchedPlace.description}
             initialValid={true}
+          />
+          <ImageUpload
+            id="image"
+            center
+            edit
+            onInput={inputHandler}
+            errorText="Please provide an image."
           />
           <Button type="submit" disabled={!formState.isValid}>
             UPDATE PLACE

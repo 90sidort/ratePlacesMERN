@@ -53,6 +53,12 @@ const ImageUpload = (props) => {
           {previewURL && <img src={previewURL} alt="Preview" />}
           {!previewURL && <p>Please, pick an image.</p>}
         </div>
+        {props.edit && (
+          <p>
+            If you have an image and don't want to change it, leave this field
+            empty.
+          </p>
+        )}
         <Button type="button" onClick={pickImageHandler}>
           PICK IMAGE
         </Button>
