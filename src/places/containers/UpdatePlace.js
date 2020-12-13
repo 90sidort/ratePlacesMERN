@@ -74,7 +74,10 @@ const UpdatePlace = () => {
       await sendRequest(
         `http://localhost:5000/api/places/${placeId}`,
         "PATCH",
-        formData
+        formData,
+        {
+          Authorization: `Bearer ${auth.token}`,
+        }
       );
       history.push(`/${auth.userId}/places`);
     } catch (e) {}
