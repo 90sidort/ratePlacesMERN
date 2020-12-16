@@ -27,7 +27,7 @@ const PlaceItem = (props) => {
     setShowConfirmModale(false);
     try {
       await sendRequest(
-        `http://localhost:5000/api/places/${props.id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/places/${props.id}`,
         "DELETE",
         {},
         {
@@ -37,7 +37,7 @@ const PlaceItem = (props) => {
       props.onDelete(props.id);
     } catch (e) {}
   };
-
+  console.log(process.env.REACT_APP_BACKEND_URL);
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />
@@ -95,8 +95,8 @@ const PlaceItem = (props) => {
             <img
               src={
                 props.image !== "placeholder"
-                  ? `http://localhost:5000/${props.image}`
-                  : `http://localhost:5000/uploads/images/tundra.jpg`
+                  ? `${process.env.REACT_APP_BACKEND_URL}/${props.image}`
+                  : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/tundra.jpg`
               }
               alt={props.title}
             />

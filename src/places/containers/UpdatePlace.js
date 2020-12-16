@@ -38,7 +38,7 @@ const UpdatePlace = () => {
     const fetchPlace = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/places/${placeId}`
+          `${process.env.REACT_APP_BACKEND_URL}/api/places/${placeId}`
         );
         updatefetchedPlace(responseData.place);
         setFormData(
@@ -72,7 +72,7 @@ const UpdatePlace = () => {
         formState.inputs.image ? formState.inputs.image.value : "leave"
       );
       await sendRequest(
-        `http://localhost:5000/api/places/${placeId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/places/${placeId}`,
         "PATCH",
         formData,
         {

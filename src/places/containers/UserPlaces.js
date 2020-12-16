@@ -16,7 +16,7 @@ const UserPlaces = () => {
     const fetchPlaces = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:5000/api/places/user/${authId}`
+          `${process.env.REACT_APP_BACKEND_URL}/api/places/user/${authId}`
         );
         updatefetchedPlaces(responseData.places);
       } catch (e) {}
