@@ -37,6 +37,28 @@
   border-color: #830000;
 }
 
+.button--like {
+  background: rgb(54, 12, 204);
+  border-color: #2600ff;
+}
+
+.button--like:hover,
+.button--like:active {
+  background: #00c3ff;
+  border-color: #00ccff;
+}
+
+.button--unlike {
+  background: rgb(95, 1, 124);
+  border-color: #8c0cd6;
+}
+
+.button--unlike:hover,
+.button--unlike:active {
+  background: #9900ff;
+  border-color: #9e0efd;
+}
+
 .button--danger:hover,
 .button--danger:active {
   background: #f34343;

@@ -16,6 +16,7 @@ const PlaceList = (props) => {
       </div>
     );
   }
+  console.log(props.places);
   return (
     <ul className="place-list">
       {props.places.map((place) => (
@@ -28,6 +29,7 @@ const PlaceList = (props) => {
           description={place.description}
           creatorId={place.creator}
           coordinates={place.location}
+          likes={place.likes}
           onDelete={props.onDeletePlace}
         />
       ))}

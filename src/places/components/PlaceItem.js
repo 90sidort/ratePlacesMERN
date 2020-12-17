@@ -17,6 +17,7 @@ const PlaceItem = (props) => {
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModale] = useState(false);
   const [showReviewModal, setShowRevieModal] = useState(false);
+  const [isLiked, setIsLiked] = useState(props.likes.includes(auth.userId));
   const openMapHandler = () => setShowMap(true);
   const closeMapHandler = () => setShowMap(false);
   const showModalHandler = () => setShowConfirmModale(true);
@@ -37,7 +38,19 @@ const PlaceItem = (props) => {
       props.onDelete(props.id);
     } catch (e) {}
   };
-  console.log(process.env.REACT_APP_BACKEND_URL);
+  const likeUnlikeHandler = async () => {
+    try {
+      await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/api/places/like/${props.id}`,
+        "PATCH",
+        {},
+        {
+          Authorization: `Bearer ${auth.token}`,
+        }
+      );
+    } catch (e) {}
+    setIsLiked(true);
+  };
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />
@@ -110,6 +123,15 @@ const PlaceItem = (props) => {
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
+            {isLiked === true ? (
+              <Button like onClick={likeUnlikeHandler}>
+                Unlike
+              </Button>
+            ) : (
+              <Button unlike onClick={likeUnlikeHandler}>
+                Like
+              </Button>
+            )}
             <Button inverse onClick={showReviewModalHandler}>
               REVIEW
             </Button>
