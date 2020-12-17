@@ -18,6 +18,7 @@ const PlaceItem = (props) => {
   const [showConfirmModal, setShowConfirmModale] = useState(false);
   const [showReviewModal, setShowRevieModal] = useState(false);
   const [isLiked, setIsLiked] = useState(props.likes.includes(auth.userId));
+  const [likesCount, setLikesCount] = useState(props.likes.length);
   const openMapHandler = () => setShowMap(true);
   const closeMapHandler = () => setShowMap(false);
   const showModalHandler = () => setShowConfirmModale(true);
@@ -39,17 +40,21 @@ const PlaceItem = (props) => {
     } catch (e) {}
   };
   const likeUnlikeHandler = async () => {
+    const likeOrDislike = isLiked ? "unlike" : "like";
     try {
       await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/api/places/like/${props.id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/places/${likeOrDislike}/${props.id}`,
         "PATCH",
         {},
         {
           Authorization: `Bearer ${auth.token}`,
         }
-      );
+      ).then((res) => {
+        setLikesCount(res.place.likes.length);
+      });
     } catch (e) {}
-    setIsLiked(true);
+
+    setIsLiked(isLiked ? false : true);
   };
   return (
     <React.Fragment>
@@ -118,20 +123,25 @@ const PlaceItem = (props) => {
             <h2>{props.title}</h2>
             <h3>{props.address}</h3>
             <p>{props.description}</p>
+            <small>
+              {likesCount} {likesCount !== 1 ? "likes" : "like"}
+            </small>
           </div>
           <div className="place-item__actions">
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            {isLiked === true ? (
+            {auth.userId && isLiked && (
               <Button like onClick={likeUnlikeHandler}>
                 Unlike
               </Button>
-            ) : (
+            )}
+            {auth.userId && !isLiked && (
               <Button unlike onClick={likeUnlikeHandler}>
                 Like
               </Button>
             )}
+
             <Button inverse onClick={showReviewModalHandler}>
               REVIEW
             </Button>
