@@ -10,6 +10,7 @@ import PlaceList from "../components/PlaceList";
 const UserPlaces = () => {
   const authId = useParams().userId;
   const [fetchedPlaces, updatefetchedPlaces] = useState([]);
+  const [fetchedUser, updateFetchedUser] = useState(null);
   const { isLoading, isError, sendRequest, clearError } = useHttp();
 
   useEffect(() => {
@@ -21,6 +22,16 @@ const UserPlaces = () => {
         updatefetchedPlaces(responseData.places);
       } catch (e) {}
     };
+    const fetchUser = async () => {
+      try {
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/api/users/${authId}`
+        );
+
+        updateFetchedUser(responseData.user);
+      } catch (e) {}
+    };
+    fetchUser();
     fetchPlaces();
   }, [authId, sendRequest]);
 
@@ -38,7 +49,11 @@ const UserPlaces = () => {
           <LoadingSpinner asOverlay />
         </div>
       )}
-      <PlaceList places={fetchedPlaces} onDeletePlace={placeDeleteHandler} />
+      <PlaceList
+        places={fetchedPlaces}
+        userData={fetchedUser}
+        onDeletePlace={placeDeleteHandler}
+      />
     </React.Fragment>
   );
 };
