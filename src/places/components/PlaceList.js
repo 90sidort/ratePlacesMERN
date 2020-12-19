@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 
 import Card from "../../shared/components/UIElements/Card";
 import PlaceItem from "./PlaceItem";
 import Button from "../../shared/components/FormElements/Button";
+import { AuthContext } from "../../shared/context/auth-context";
+import { useHttp } from "../../shared/hooks/http-hook";
 import "./PlaceList.css";
 
 const PlaceList = (props) => {
+  const auth = useContext(AuthContext);
+  const { isLoading, isError, sendRequest, clearError } = useHttp();
+  const [isFollowed, setIsFollowed] = useState(
+    props.userData && props.userData.followers.includes(auth.userId)
+  );
+
+  const likeHandler = async () => {
+    try {
+      await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/api/users/follow/${props.userData.id}`,
+        "PUT",
+        {},
+        {
+          Authorization: `Bearer ${auth.token}`,
+        }
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   if (props.places.length === 0) {
     return (
       <div className="place-list center">
@@ -29,7 +52,7 @@ const PlaceList = (props) => {
               props.userData.followers.length !== 1 ? "users" : "user"
             }.`}</small>
             <br />
-            <Button to="/places/new">Follow</Button>
+            <Button onClick={likeHandler}>Follow</Button>
           </Card>
         </div>
       )}
