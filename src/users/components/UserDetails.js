@@ -28,31 +28,29 @@ const UserDetails = (props) => {
       );
       setIsFollowed(isFollowed ? false : true);
       setUserCount(isFollowed ? userCount - 1 : userCount + 1);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
-  console.log(props.name);
-  console.log(isFollowed);
-  console.log(auth.userId);
+  const isYou = props.id === auth.userId;
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
       <div className="place-list center">
-        <Card>
-          <h4>{`Welcome to ${props.name} profile.`}</h4>
-          <small>{`This user has ${props.places.length} ${
+        <Card className={"card-user"}>
+          <h4>{`Welcome to ${isYou ? "your" : props.name} profile.`}</h4>
+          <small>{` ${isYou ? "You have" : "This user has"} ${
+            props.places.length
+          } ${
             props.places.length !== 1 ? "places" : "place"
-          } and is followed by ${userCount} ${
-            userCount !== 1 ? "users" : "user"
+          } and ${userCount} ${
+            userCount !== 1 ? "followers" : "follower"
           }.`}</small>
           <br />
-          {auth.userId && isFollowed && (
+          {!isYou && auth.userId && isFollowed && (
             <Button onClick={folloHandler}>Unfollow</Button>
           )}
-          {auth.userId && !isFollowed && (
+          {!isYou && auth.userId && !isFollowed && (
             <Button onClick={folloHandler}>Follow</Button>
           )}
         </Card>

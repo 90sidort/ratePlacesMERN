@@ -12,7 +12,7 @@ const UsersList = (props) => {
       </div>
     );
   }
-  console.log(props.users);
+
   return (
     <ul className="users-list">
       {props.users.map((user) => (

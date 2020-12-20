@@ -1,8 +1,6 @@
 import React from "react";
 
-import Card from "../../shared/components/UIElements/Card";
 import PlaceItem from "./PlaceItem";
-import Button from "../../shared/components/FormElements/Button";
 
 import "./PlaceList.css";
 import UserDetails from "../../users/components/UserDetails";
@@ -11,10 +9,14 @@ const PlaceList = (props) => {
   if (props.places.length === 0) {
     return (
       <div className="place-list center">
-        <Card>
-          <h2>No places found. If you feel like it, create one.</h2>
-          <Button to="/places/new">Share place</Button>
-        </Card>
+        {props.userData && (
+          <UserDetails
+            name={props.userData.name}
+            places={props.userData.places}
+            followers={props.userData.followers}
+            id={props.userData._id}
+          />
+        )}
       </div>
     );
   }
