@@ -39,6 +39,7 @@ const PlaceList = (props) => {
             title={place.title}
             address={place.address}
             description={place.description}
+            about={place.about}
             creatorId={place.creator}
             coordinates={place.location}
             likes={place.likes}

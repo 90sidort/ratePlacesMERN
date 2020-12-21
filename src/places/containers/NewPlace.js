@@ -22,7 +22,8 @@ const NewPlace = () => {
   const [formState, inputHandler] = useForm(
     {
       title: { value: "", isValid: false },
-      description: { value: "", isValid: false },
+      about: { value: "", isValid: false },
+      description: { value: "", isValid: true },
       address: { value: "", isValid: false },
       image: { value: null, isValid: true },
     },
@@ -36,6 +37,7 @@ const NewPlace = () => {
       const formData = new FormData();
       formData.append("title", formState.inputs.title.value);
       formData.append("description", formState.inputs.description.value);
+      formData.append("about", formState.inputs.about.value);
       formData.append("address", formState.inputs.address.value);
       formData.append("image", formState.inputs.image.value);
       await sendRequest(
@@ -65,11 +67,11 @@ const NewPlace = () => {
           onInput={inputHandler}
         />
         <Input
-          id="description"
-          label="Description"
+          id="about"
+          label="About"
           element="textarea"
           validators={[VALIDATOR_MINLENGTH(5)]}
-          errorText="Please enter a valid description (at least 5 characters)."
+          errorText="Please enter a short description (at least 5 characters)."
           onInput={inputHandler}
         />
         <Input
@@ -80,6 +82,14 @@ const NewPlace = () => {
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a valid address."
           onInput={inputHandler}
+        />
+        <Input
+          id="description"
+          label="Description"
+          element="textarea"
+          onInput={inputHandler}
+          errorText="Provide a description if you feel like it."
+          validators={""}
         />
         <ImageUpload
           id="image"
