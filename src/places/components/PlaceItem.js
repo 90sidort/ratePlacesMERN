@@ -53,6 +53,7 @@ const PlaceItem = (props) => {
 
     setIsLiked(isLiked ? false : true);
   };
+
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />

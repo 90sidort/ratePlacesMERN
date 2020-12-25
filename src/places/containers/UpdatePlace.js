@@ -25,6 +25,7 @@ const UpdatePlace = () => {
   const [formState, inputHandler, setFormData] = useForm(
     {
       title: { value: "", isValid: false },
+      type: { value: "", isValid: true },
       description: { value: "", isValid: true },
       about: { value: "", isValid: false },
       image: { value: null, isValid: true },
@@ -53,6 +54,10 @@ const UpdatePlace = () => {
               value: responseData.place.about,
               isValid: true,
             },
+            type: {
+              value: responseData.place.type,
+              isValid: true,
+            },
           },
           true
         );
@@ -68,6 +73,7 @@ const UpdatePlace = () => {
       formData.append("title", formState.inputs.title.value);
       formData.append("description", formState.inputs.description.value);
       formData.append("about", formState.inputs.about.value);
+      formData.append("type", formState.inputs.type.value);
       formData.append(
         "image",
         formState.inputs.image ? formState.inputs.image.value : "leave"
@@ -114,6 +120,17 @@ const UpdatePlace = () => {
             onInput={inputHandler}
             initialValue={fetchedPlace.title}
             initialValid={true}
+          />
+          <Input
+            id="type"
+            element="select"
+            type="text"
+            label="Type"
+            onInput={inputHandler}
+            options={["Monument", "Site", "Event", "Other"]}
+            initialValue={fetchedPlace.type}
+            initialValid={true}
+            validators={""}
           />
           <Input
             id="about"

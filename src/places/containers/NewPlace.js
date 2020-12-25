@@ -22,6 +22,7 @@ const NewPlace = () => {
   const [formState, inputHandler] = useForm(
     {
       title: { value: "", isValid: false },
+      type: { value: "", isValid: true },
       about: { value: "", isValid: false },
       description: { value: "", isValid: true },
       address: { value: "", isValid: false },
@@ -40,6 +41,7 @@ const NewPlace = () => {
       formData.append("about", formState.inputs.about.value);
       formData.append("address", formState.inputs.address.value);
       formData.append("image", formState.inputs.image.value);
+      formData.append("type", formState.inputs.type.value);
       await sendRequest(
         `${process.env.REACT_APP_BACKEND_URL}/api/places`,
         "POST",
@@ -67,6 +69,15 @@ const NewPlace = () => {
           onInput={inputHandler}
         />
         <Input
+          id="type"
+          label="Type"
+          element="select"
+          options={["Monument", "Site", "Event", "Other"]}
+          onInput={inputHandler}
+          initialValue="monument"
+          validators={""}
+        />
+        <Input
           id="about"
           label="About"
           element="textarea"
@@ -88,8 +99,8 @@ const NewPlace = () => {
           label="Description"
           element="textarea"
           onInput={inputHandler}
-          errorText="Provide a description if you feel like it."
-          validators={""}
+          // errorText="Provide a description if you feel like it."
+          // validators={""}
         />
         <ImageUpload
           id="image"
