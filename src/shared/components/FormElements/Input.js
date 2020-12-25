@@ -48,8 +48,10 @@ const Input = (props) => {
     dispatch({ type: "TOUCH" });
   };
 
-  const inputElement =
-    props.element === "input" ? (
+  let element;
+
+  if (props.element === "input") {
+    element = (
       <input
         id={props.id}
         type={props.type}
@@ -58,15 +60,30 @@ const Input = (props) => {
         onBlur={touchHandler}
         value={inputState.value}
       />
-    ) : (
+    );
+  } else if (props.element === "textarea") {
+    element = (
       <textarea
         id={props.id}
         rows={props.rows || 3}
         onChange={changeHandler}
-        onBlur={touchHandler}
+        onBlur={props.id !== "description" ? touchHandler : () => {}}
         value={inputState.value}
       />
     );
+  } else if (props.element === "select") {
+    element = (
+      <select onChange={changeHandler} value={inputState.value}>
+        {props.options.map((opt) => {
+          return (
+            <option key={opt} value={opt.toLowerCase()}>
+              {opt}
+            </option>
+          );
+        })}
+      </select>
+    );
+  }
 
   return (
     <div
@@ -75,7 +92,7 @@ const Input = (props) => {
       }`}
     >
       <label htmlFor={props.id}>{props.label}</label>
-      {inputElement}
+      {element}
       {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
     </div>
   );

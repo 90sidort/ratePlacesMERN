@@ -34,11 +34,13 @@ const PlaceList = (props) => {
         {props.places.map((place) => (
           <PlaceItem
             key={place.id}
+            type={place.type}
             id={place.id}
             image={place.image}
             title={place.title}
             address={place.address}
             description={place.description}
+            about={place.about}
             creatorId={place.creator}
             coordinates={place.location}
             likes={place.likes}

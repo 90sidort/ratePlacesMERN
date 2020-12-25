@@ -16,15 +16,12 @@ const PlaceItem = (props) => {
   const { isLoading, isError, sendRequest, clearError } = useHttp();
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModale] = useState(false);
-  const [showReviewModal, setShowRevieModal] = useState(false);
   const [isLiked, setIsLiked] = useState(props.likes.includes(auth.userId));
   const [likesCount, setLikesCount] = useState(props.likes.length);
   const openMapHandler = () => setShowMap(true);
   const closeMapHandler = () => setShowMap(false);
   const showModalHandler = () => setShowConfirmModale(true);
   const cancelModalHandler = () => setShowConfirmModale(false);
-  const showReviewModalHandler = () => setShowRevieModal(true);
-  const cancelReviewModalHandler = () => setShowRevieModal(false);
   const deleteModalHandler = async () => {
     setShowConfirmModale(false);
     try {
@@ -56,6 +53,7 @@ const PlaceItem = (props) => {
 
     setIsLiked(isLiked ? false : true);
   };
+
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />
@@ -92,21 +90,6 @@ const PlaceItem = (props) => {
         >
           <p>Please confirm deletetion.</p>
         </Modal>
-        <Modal
-          show={showReviewModal}
-          onCancel={cancelReviewModalHandler}
-          header="Review"
-          footerClass="place-item__modal-actions"
-          footer={
-            <React.Fragment>
-              <Button inverse onClick={cancelReviewModalHandler}>
-                CLOSE
-              </Button>
-            </React.Fragment>
-          }
-        >
-          <p>Very good, would recommend.</p>
-        </Modal>
         <Card className="place-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image">
@@ -122,7 +105,7 @@ const PlaceItem = (props) => {
           <div className="place-item__info">
             <h2>{props.title}</h2>
             <h3>{props.address}</h3>
-            <p>{props.description}</p>
+            <p>{props.about}</p>
             <small>
               {likesCount} {likesCount !== 1 ? "likes" : "like"}
             </small>
@@ -141,10 +124,6 @@ const PlaceItem = (props) => {
                 Like
               </Button>
             )}
-
-            <Button inverse onClick={showReviewModalHandler}>
-              REVIEW
-            </Button>
             {auth.userId === props.creatorId && (
               <Button to={`/places/${props.id}`}>EDIT</Button>
             )}

@@ -24,11 +24,10 @@ const UpdatePlace = () => {
   const history = useHistory();
   const [formState, inputHandler, setFormData] = useForm(
     {
-      title: {
-        value: "",
-        isValid: false,
-      },
-      description: { value: "", isValid: false },
+      title: { value: "", isValid: false },
+      type: { value: "", isValid: true },
+      description: { value: "", isValid: true },
+      about: { value: "", isValid: false },
       image: { value: null, isValid: true },
     },
     false
@@ -51,6 +50,14 @@ const UpdatePlace = () => {
               value: responseData.place.description,
               isValid: true,
             },
+            about: {
+              value: responseData.place.about,
+              isValid: true,
+            },
+            type: {
+              value: responseData.place.type,
+              isValid: true,
+            },
           },
           true
         );
@@ -65,6 +72,8 @@ const UpdatePlace = () => {
       const formData = new FormData();
       formData.append("title", formState.inputs.title.value);
       formData.append("description", formState.inputs.description.value);
+      formData.append("about", formState.inputs.about.value);
+      formData.append("type", formState.inputs.type.value);
       formData.append(
         "image",
         formState.inputs.image ? formState.inputs.image.value : "leave"
@@ -113,14 +122,35 @@ const UpdatePlace = () => {
             initialValid={true}
           />
           <Input
+            id="type"
+            element="select"
+            type="text"
+            label="Type"
+            onInput={inputHandler}
+            options={["Monument", "Site", "Event", "Other"]}
+            initialValue={fetchedPlace.type}
+            initialValid={true}
+            validators={""}
+          />
+          <Input
+            id="about"
+            label="About"
+            element="textarea"
+            validators={[VALIDATOR_MINLENGTH(5)]}
+            errorText="Please enter a short description (at least 5 characters)."
+            onInput={inputHandler}
+            initialValue={fetchedPlace.about}
+            initialValid={true}
+          />
+          <Input
             id="description"
             label="Description"
             element="textarea"
-            validators={[VALIDATOR_MINLENGTH(5)]}
-            errorText="Please enter a valid description (at least 5 characters)."
             onInput={inputHandler}
             initialValue={fetchedPlace.description}
             initialValid={true}
+            errorText="Provide a description if you feel like it."
+            validators={""}
           />
           <ImageUpload
             id="image"
