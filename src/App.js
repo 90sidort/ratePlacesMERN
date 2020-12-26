@@ -14,6 +14,7 @@ import UpdatePlace from "./places/containers/UpdatePlace";
 import Auth from "./users/containers/Auth";
 import { AuthContext } from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
+import PlaceDetails from "./places/components/PlaceDetails";
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -34,6 +35,9 @@ const App = () => {
         </Route>
         <Route path="/places/:placeId" exact={true}>
           <UpdatePlace />
+        </Route>
+        <Route path="/placedetails/:placeId" exact={true}>
+          <PlaceDetails />
         </Route>
         <Redirect to={"/"} />
       </Switch>

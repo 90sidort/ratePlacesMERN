@@ -20,6 +20,7 @@ const PlaceList = (props) => {
       </div>
     );
   }
+  console.log();
   return (
     <React.Fragment>
       {props.userData && (
@@ -45,6 +46,7 @@ const PlaceList = (props) => {
             coordinates={place.location}
             likes={place.likes}
             onDelete={props.onDeletePlace}
+            comments={place.comments}
           />
         ))}
       </ul>
