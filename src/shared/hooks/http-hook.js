@@ -12,7 +12,6 @@ export const useHttp = () => {
       const abortController = new AbortController();
       activeRequest.current.push(abortController);
       try {
-        console.log(body);
         const response = await fetch(url, {
           method,
           body,
@@ -20,7 +19,6 @@ export const useHttp = () => {
           signal: activeRequest.signal,
         });
         const responseData = await response.json();
-        console.log(responseData);
 
         activeRequest.current = activeRequest.current.filter(
           (reqController) => reqController !== activeRequest

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Users from "./users/containers/Users";
 import NewPlace from "./places/containers/NewPlace";
@@ -39,7 +34,6 @@ const App = () => {
         <Route path="/placedetails/:placeId" exact={true}>
           <PlaceDetails />
         </Route>
-        <Redirect to={"/"} />
       </Switch>
     );
   } else {
@@ -54,7 +48,6 @@ const App = () => {
         <Route path="/auth" exact={true}>
           <Auth />
         </Route>
-        <Redirect to={"/auth"} />
       </Switch>
     );
   }

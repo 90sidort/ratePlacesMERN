@@ -39,7 +39,6 @@ const PlaceItem = (props) => {
   };
   const likeUnlikeHandler = async () => {
     const likeOrDislike = isLiked ? "unlike" : "like";
-    console.log(process.env.REACT_APP_BACKEND_URL);
     try {
       await sendRequest(
         `${process.env.REACT_APP_BACKEND_URL}/api/places/${likeOrDislike}/${props.id}`,
@@ -55,7 +54,6 @@ const PlaceItem = (props) => {
 
     setIsLiked(isLiked ? false : true);
   };
-  console.log(props.comments);
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />
@@ -94,24 +92,7 @@ const PlaceItem = (props) => {
         </Modal>
         <Card className="place-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
-          <Link
-            to={{
-              pathname: `/placedetails/${props.id}`,
-              placeData: {
-                id: props.id,
-                creatorId: props.creatorId,
-                likes: props.likes.length,
-                about: props.about,
-                image: props.image,
-                title: props.title,
-                address: props.address,
-                desc: props.description,
-                coordinates: props.coordinates,
-                comments: props.comments,
-              },
-            }}
-            kuc="kucyk"
-          >
+          <Link to={`/placedetails/${props.id}`}>
             <div className="place-item__image">
               <img
                 src={

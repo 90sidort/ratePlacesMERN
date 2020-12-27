@@ -20,7 +20,6 @@ const PlaceList = (props) => {
       </div>
     );
   }
-  console.log();
   return (
     <React.Fragment>
       {props.userData && (

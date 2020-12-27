@@ -3,48 +3,44 @@ import { useLocation } from "react-router-dom";
 
 import MapboxGLMap from "../../shared/components/UIElements/Map";
 import Button from "../../shared/components/FormElements/Button";
-import Input from "../../shared/components/FormElements/Input";
-import { useForm } from "../../shared/hooks/form-hook";
 import { useHttp } from "../../shared/hooks/http-hook";
-import { VALIDATOR_MINLENGTH } from "../../shared/utils/validators";
 import { AuthContext } from "../../shared/context/auth-context";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
-const PlaceDetails = (props) => {
+const PlaceDetails = () => {
   const location = useLocation();
-  const [data, setData] = useState({ ...location.placeData });
+  const placeId = location.pathname.substring(14);
+  const [placeDetails, setPlaceDetails] = useState({});
+  const [commentInput, setCommentInput] = useState("");
   const auth = useContext(AuthContext);
-  const [comments, setComments] = useState(null);
-  const [formState, inputHandler] = useForm(
-    {
-      comment: { value: "", isValid: false },
-    },
-    false
-  );
   const { isLoading, isError, sendRequest, clearError } = useHttp();
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/api/places/comments/${data.id}`
+          `${process.env.REACT_APP_BACKEND_URL}/api/places/${placeId}`
         );
-        setComments(responseData);
+        setPlaceDetails(responseData.place);
       } catch (e) {}
     };
     fetchComments();
-  }, [data, auth, sendRequest]);
+  }, [sendRequest, placeId]);
+
+  const onCommentChangeHandler = (e) => {
+    setCommentInput(e.target.value);
+  };
 
   const addCommentHandler = async (e) => {
     e.preventDefault();
     try {
       const body = JSON.stringify({
-        comment: formState.inputs.comment.value,
+        comment: commentInput,
         userId: auth.userId,
       });
       const res = await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/api/places/comments/${data.id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/places/comments/${placeId}`,
         "POST",
         body,
         {
@@ -52,11 +48,9 @@ const PlaceDetails = (props) => {
           "Content-Type": "application/json",
         }
       );
-      const resArray = Object.values(res);
-      setComments(resArray);
-    } catch (e) {
-      console.log(e);
-    }
+      await setCommentInput("");
+      setPlaceDetails(res.place);
+    } catch (e) {}
   };
 
   const delCommentHandler = async (commentId) => {
@@ -65,7 +59,7 @@ const PlaceDetails = (props) => {
     });
     try {
       const res = await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/api/places/comments/${data.id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/places/comments/${placeId}`,
         "PATCH",
         body,
         {
@@ -73,11 +67,8 @@ const PlaceDetails = (props) => {
           "Content-Type": "application/json",
         }
       );
-      const resArray = Object.values(res);
-      setComments(resArray);
-    } catch (e) {
-      console.log(e);
-    }
+      setPlaceDetails(res.place);
+    } catch (e) {}
   };
 
   return (
@@ -85,50 +76,53 @@ const PlaceDetails = (props) => {
       <ErrorModal error={isError} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
       <div>
-        <h1>{data.title}</h1>
-        <h3>{data.about}</h3>
-        <p>
-          This place has {data.likes} {data.likes === 1 ? "like" : "likes"}
-        </p>
-        <div>
-          {" "}
-          <img
-            src={
-              props.image !== "placeholder"
-                ? `${process.env.REACT_APP_BACKEND_URL}/${data.image}`
-                : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/tundra.jpg`
-            }
-            alt={data.title}
-          />
-        </div>
-        <div className="map-container">
-          <MapboxGLMap
-            coordinates={[data.coordinates.lat, data.coordinates.lng]}
-          />
-        </div>
-        <p>{data.desc}</p>
+        <h1>{placeDetails.title}</h1>
+        <h3>{placeDetails.about}</h3>
+        {placeDetails.likes && (
+          <p>
+            This place has {placeDetails.likes.length}{" "}
+            {placeDetails.likes.length === 1 ? "like" : "likes"}
+          </p>
+        )}
+        <img
+          src={
+            placeDetails.image !== "placeholder"
+              ? `${process.env.REACT_APP_BACKEND_URL}/${placeDetails.image}`
+              : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/tundra.jpg`
+          }
+          alt={placeDetails.title}
+        />
+        {placeDetails.location && (
+          <div className="map-container">
+            <MapboxGLMap
+              coordinates={[
+                placeDetails.location.lat,
+                placeDetails.location.lng,
+              ]}
+            />
+          </div>
+        )}
+        <p>{placeDetails.description}</p>
         <form className="place-form" onSubmit={addCommentHandler}>
-          <Input
-            id="comment"
-            type="text"
-            label="Comment"
-            element="input"
-            validators={[VALIDATOR_MINLENGTH(1)]}
-            errorText="Comment must have at least one character."
-            onInput={inputHandler}
-          />
-          <Button disabled={!formState.isValid} type="submit">
+          <div className={`form-control`}>
+            <label htmlFor="comment">Comment</label>
+            <input id="comment" type="text" onChange={onCommentChangeHandler} />
+          </div>
+          <Button disabled={commentInput.length === 0} type="submit">
             Add comment
           </Button>
         </form>
-        {console.log(123, comments, typeof comments)}
-        {comments && (
+        {placeDetails.comments && (
           <div>
-            {comments.map((comment) => {
+            {placeDetails.comments.map((comment) => {
               return (
                 <div key={comment._id}>
                   <p>{comment.text}</p>
-                  <button onClick={() => delCommentHandler(comment._id)}>
+                  <button
+                    onClick={() => {
+                      delCommentHandler(comment._id);
+                    }}
+                  >
                     X
                   </button>
                 </div>
