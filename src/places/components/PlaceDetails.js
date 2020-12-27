@@ -10,10 +10,8 @@ import { VALIDATOR_MINLENGTH } from "../../shared/utils/validators";
 import { AuthContext } from "../../shared/context/auth-context";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
-import { useHistory } from "react-router-dom";
 
 const PlaceDetails = (props) => {
-  const history = useHistory();
   const location = useLocation();
   const [data, setData] = useState({ ...location.placeData });
   const auth = useContext(AuthContext);
@@ -32,12 +30,11 @@ const PlaceDetails = (props) => {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/api/places/comments/${data.id}`
         );
-        console.log(responseData);
-        setComments(responseData.comments);
+        setComments(responseData);
       } catch (e) {}
     };
     fetchComments();
-  }, [setComments]);
+  }, [data, auth, sendRequest]);
 
   const addCommentHandler = async (e) => {
     e.preventDefault();
@@ -57,7 +54,6 @@ const PlaceDetails = (props) => {
       );
       const resArray = Object.values(res);
       setComments(resArray);
-      setData(data);
     } catch (e) {
       console.log(e);
     }
@@ -83,8 +79,6 @@ const PlaceDetails = (props) => {
       console.log(e);
     }
   };
-
-  console.log(comments);
 
   return (
     <React.Fragment>
@@ -127,7 +121,7 @@ const PlaceDetails = (props) => {
             Add comment
           </Button>
         </form>
-        {console.log(123, comments)}
+        {console.log(123, comments, typeof comments)}
         {comments && (
           <div>
             {comments.map((comment) => {
