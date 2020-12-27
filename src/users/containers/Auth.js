@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import Button from "../../shared/components/FormElements/Button";
 import Input from "../../shared/components/FormElements/Input";
@@ -19,6 +20,7 @@ import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 
 const Auth = () => {
   const auth = useContext(AuthContext);
+  const history = useHistory();
   const [isAuth, setIsAuth] = useState(true);
   const { isLoading, isError, sendRequest, clearError } = useHttp();
   const [formState, inputHandler, setFormData] = useForm(
@@ -66,6 +68,7 @@ const Auth = () => {
           { "Content-Type": "application/json" }
         );
         auth.login(responseData.userId, responseData.token);
+        history.push("/");
       } catch (e) {}
     } else {
       try {
