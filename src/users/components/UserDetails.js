@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { AuthContext } from "../../shared/context/auth-context";
 import { useHttp } from "../../shared/hooks/http-hook";
@@ -9,6 +10,7 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 const UserDetails = (props) => {
   const auth = useContext(AuthContext);
+  const history = useHistory();
   const { isLoading, isError, sendRequest, clearError } = useHttp();
   const [isFollowed, setIsFollowed] = useState(
     props.followers.includes(auth.userId)
@@ -53,6 +55,12 @@ const UserDetails = (props) => {
           {!isYou && auth.userId && !isFollowed && (
             <Button onClick={folloHandler}>Follow</Button>
           )}
+          <Button
+            inverse
+            onClick={() => history.push(`/userdetails/${props.id}`)}
+          >
+            Details
+          </Button>
         </Card>
       </div>
     </React.Fragment>

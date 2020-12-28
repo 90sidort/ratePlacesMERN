@@ -17,7 +17,7 @@ const PlaceDetails = () => {
   const { isLoading, isError, sendRequest, clearError } = useHttp();
 
   useEffect(() => {
-    const fetchComments = async () => {
+    const fetchDetails = async () => {
       try {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/api/places/${placeId}`
@@ -25,7 +25,7 @@ const PlaceDetails = () => {
         setPlaceDetails(responseData.place);
       } catch (e) {}
     };
-    fetchComments();
+    fetchDetails();
   }, [sendRequest, placeId]);
 
   const onCommentChangeHandler = (e) => {

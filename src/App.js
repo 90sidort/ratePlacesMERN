@@ -15,6 +15,7 @@ import Auth from "./users/containers/Auth";
 import { AuthContext } from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
 import PlaceDetails from "./places/components/PlaceDetails";
+import UserInfo from "./users/containers/UserInfo";
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -39,6 +40,9 @@ const App = () => {
         <Route path="/placedetails/:placeId" exact={true}>
           <PlaceDetails />
         </Route>
+        <Route>
+          <UserInfo path="/userdetails/:userId" exact={true} />
+        </Route>
       </Switch>
     );
   } else {
@@ -53,7 +57,13 @@ const App = () => {
         <Route path="/auth" exact={true}>
           <Auth />
         </Route>
-        <Redirect to={"/auth"} />
+        <Route path="/placedetails/:placeId" exact={true}>
+          <PlaceDetails />
+        </Route>
+        <Route>
+          <UserInfo path="/userdetails/:userId" exact={true} />
+        </Route>
+        {/* <Redirect to={"/auth"} /> */}
       </Switch>
     );
   }
