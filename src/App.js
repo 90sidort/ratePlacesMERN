@@ -40,8 +40,8 @@ const App = () => {
         <Route path="/placedetails/:placeId" exact={true}>
           <PlaceDetails />
         </Route>
-        <Route>
-          <UserInfo path="/userdetails/:userId" exact={true} />
+        <Route path="/userdetails/:userId" exact={true}>
+          <UserInfo />
         </Route>
       </Switch>
     );
@@ -60,8 +60,8 @@ const App = () => {
         <Route path="/placedetails/:placeId" exact={true}>
           <PlaceDetails />
         </Route>
-        <Route>
-          <UserInfo path="/userdetails/:userId" exact={true} />
+        <Route path="/userdetails/:userId" exact={true}>
+          <UserInfo />
         </Route>
         {/* <Redirect to={"/auth"} /> */}
       </Switch>

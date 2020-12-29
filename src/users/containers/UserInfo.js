@@ -14,10 +14,11 @@ const UserInfo = () => {
   const location = useLocation();
   const userId = location.pathname.substring(13);
   const [userDetails, setUserDetails] = useState({});
+  const [follow, setFollow] = useState({});
   const { isLoading, isError, sendRequest, clearError } = useHttp();
 
   useEffect(() => {
-    const fetchComments = async () => {
+    const fetchUserData = async () => {
       try {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`
@@ -25,11 +26,36 @@ const UserInfo = () => {
         setUserDetails(responseData.user);
       } catch (e) {}
     };
-    fetchComments();
+    fetchUserData();
   }, [sendRequest, userId]);
 
-  console.log(userDetails);
-  console.log(userDetails.followers);
+  useEffect(() => {
+    const fetchUsersData = async () => {
+      try {
+        const body = JSON.stringify({
+          usersIdsFollowed: userDetails.following,
+          userIdsFollowers: userDetails.followers,
+        });
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/api/users/details/get`,
+          "PATCH",
+          body,
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData);
+        setFollow(responseData);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    if (userDetails.following || userDetails.followers) {
+      fetchUsersData();
+    }
+  }, [sendRequest, userDetails]);
+
+  console.log(follow);
 
   return (
     <React.Fragment>
@@ -62,16 +88,24 @@ const UserInfo = () => {
         </div>
       )}
       <div>
-        {userDetails.following && userDetails.following.length > 0 && (
+        {follow.followed && (
           <div>
             <h3>Follows</h3>
-            <div></div>
+            <div>
+              {follow.followed.map((foll) => (
+                <p key={foll._id}>{foll.name}</p>
+              ))}
+            </div>
           </div>
         )}
-        {userDetails.followers && userDetails.followers.length > 0 && (
+        {follow.followers && (
           <div>
             <h3>Is followed by</h3>
-            <div></div>
+            <div>
+              {follow.followers.map((foll) => (
+                <p key={foll._id}>{foll.name}</p>
+              ))}
+            </div>
           </div>
         )}
       </div>
