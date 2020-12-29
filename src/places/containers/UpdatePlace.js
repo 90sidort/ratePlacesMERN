@@ -27,6 +27,7 @@ const UpdatePlace = () => {
       title: { value: "", isValid: false },
       type: { value: "", isValid: true },
       description: { value: "", isValid: true },
+      address: { value: "", isValid: false },
       about: { value: "", isValid: false },
       image: { value: null, isValid: true },
     },
@@ -54,6 +55,10 @@ const UpdatePlace = () => {
               value: responseData.place.about,
               isValid: true,
             },
+            address: {
+              value: responseData.place.address,
+              isValid: true,
+            },
             type: {
               value: responseData.place.type,
               isValid: true,
@@ -74,6 +79,7 @@ const UpdatePlace = () => {
       formData.append("description", formState.inputs.description.value);
       formData.append("about", formState.inputs.about.value);
       formData.append("type", formState.inputs.type.value);
+      formData.append("address", formState.inputs.address.value);
       formData.append(
         "image",
         formState.inputs.image ? formState.inputs.image.value : "leave"
@@ -141,6 +147,17 @@ const UpdatePlace = () => {
             onInput={inputHandler}
             initialValue={fetchedPlace.about}
             initialValid={true}
+          />
+          <Input
+            id="address"
+            type="text"
+            label="Address"
+            element="input"
+            validators={[VALIDATOR_REQUIRE()]}
+            initialValue={fetchedPlace.address}
+            initialValid={true}
+            errorText="Please enter a valid address."
+            onInput={inputHandler}
           />
           <Input
             id="description"

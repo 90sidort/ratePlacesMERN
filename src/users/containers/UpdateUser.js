@@ -86,7 +86,7 @@ const UpdateUser = () => {
     return (
       <div className="center">
         <Card>
-          <h2>Could not find the place</h2>
+          <h2>Could not find the user</h2>
         </Card>
       </div>
     );

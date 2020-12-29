@@ -46,7 +46,7 @@ const Auth = () => {
         {
           ...formState.inputs,
           name: { value: "", isValid: false },
-          image: { value: null, isValid: false },
+          image: { value: null, isValid: true },
         },
         false
       );

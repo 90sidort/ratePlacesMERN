@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import Button from "../../shared/components/FormElements/Button";
+import Avatar from "../../shared/components/UIElements/Avatar";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { AuthContext } from "../../shared/context/auth-context";
@@ -44,7 +45,6 @@ const UserInfo = () => {
             "Content-Type": "application/json",
           }
         );
-        console.log(responseData);
         setFollow(responseData);
       } catch (e) {
         console.log(e);
@@ -54,8 +54,6 @@ const UserInfo = () => {
       fetchUsersData();
     }
   }, [sendRequest, userDetails]);
-
-  console.log(follow);
 
   return (
     <React.Fragment>
@@ -73,6 +71,16 @@ const UserInfo = () => {
           EDIT
         </Button>
       )}
+      <div className="user-item__image">
+        <Avatar
+          src={
+            userDetails.image !== "placeholder"
+              ? `${process.env.REACT_APP_BACKEND_URL}/${userDetails.image}`
+              : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/profile.jpg`
+          }
+          alt={userDetails.name}
+        />
+      </div>
       <div>
         <h2>{userDetails.name}</h2>
         <h4>{userDetails.about}</h4>
