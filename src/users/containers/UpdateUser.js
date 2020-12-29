@@ -142,7 +142,7 @@ const UpdateUser = () => {
             errorText="Please provide an image."
           />
           <Button type="submit" disabled={!formState.isValid}>
-            UPDATE PLACE
+            UPDATE USER
           </Button>
         </form>
       )}

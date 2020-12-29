@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import Button from "../../shared/components/FormElements/Button";
@@ -71,16 +71,18 @@ const UserInfo = () => {
           EDIT
         </Button>
       )}
-      <div className="user-item__image">
-        <Avatar
-          src={
-            userDetails.image !== "placeholder"
-              ? `${process.env.REACT_APP_BACKEND_URL}/${userDetails.image}`
-              : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/profile.jpg`
-          }
-          alt={userDetails.name}
-        />
-      </div>
+      {userDetails.image && (
+        <div className="user-item__image-profile">
+          <Avatar
+            src={
+              userDetails.image !== "placeholder"
+                ? `${process.env.REACT_APP_BACKEND_URL}/${userDetails.image}`
+                : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/profile.jpg`
+            }
+            alt={userDetails.name}
+          />
+        </div>
+      )}
       <div>
         <h2>{userDetails.name}</h2>
         <h4>{userDetails.about}</h4>
@@ -96,26 +98,63 @@ const UserInfo = () => {
         </div>
       )}
       <div>
-        {follow.followed && (
-          <div>
-            <h3>Follows</h3>
+        <div>
+          {follow.followed && (
             <div>
-              {follow.followed.map((foll) => (
-                <p key={foll._id}>{foll.name}</p>
-              ))}
+              <h3>Follows</h3>
+              <div>
+                {follow.followed.map((foll) => (
+                  <div key={foll._id}>
+                    <Link
+                      to={`/userdetails/${foll._id}`}
+                      className="avatar-link"
+                    >
+                      <Avatar
+                        className="user-item__image"
+                        src={
+                          foll.image !== "placeholder"
+                            ? `${process.env.REACT_APP_BACKEND_URL}/${foll.image}`
+                            : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/profile.jpg`
+                        }
+                        alt={foll.name}
+                      />
+
+                      <p>{foll.name}</p>
+                    </Link>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-        {follow.followers && (
-          <div>
-            <h3>Is followed by</h3>
+          )}
+        </div>
+        <div>
+          {follow.followers && (
             <div>
-              {follow.followers.map((foll) => (
-                <p key={foll._id}>{foll.name}</p>
-              ))}
+              <h3>Is followed by</h3>
+              <div>
+                {follow.followers.map((foll) => (
+                  <div key={foll._id}>
+                    <Link
+                      to={`/userdetails/${foll._id}`}
+                      className="avatar-link"
+                    >
+                      <Avatar
+                        className="user-item__image"
+                        src={
+                          foll.image !== "placeholder"
+                            ? `${process.env.REACT_APP_BACKEND_URL}/${foll.image}`
+                            : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/profile.jpg`
+                        }
+                        alt={foll.name}
+                      />
+                      <p>{foll.name}</p>
+                    </Link>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </React.Fragment>
   );

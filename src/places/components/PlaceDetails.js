@@ -84,14 +84,16 @@ const PlaceDetails = () => {
             {placeDetails.likes.length === 1 ? "like" : "likes"}
           </p>
         )}
-        <img
-          src={
-            placeDetails.image !== "placeholder"
-              ? `${process.env.REACT_APP_BACKEND_URL}/${placeDetails.image}`
-              : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/tundra.jpg`
-          }
-          alt={placeDetails.title}
-        />
+        {placeDetails.image && (
+          <img
+            src={
+              placeDetails.image !== "placeholder"
+                ? `${process.env.REACT_APP_BACKEND_URL}/${placeDetails.image}`
+                : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/tundra.jpg`
+            }
+            alt={placeDetails.title}
+          />
+        )}
         {placeDetails.location && (
           <div className="map-container">
             <MapboxGLMap
