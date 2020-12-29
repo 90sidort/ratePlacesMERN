@@ -1,14 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
-import {
-  VALIDATOR_REQUIRE,
-  VALIDATOR_MINLENGTH,
-} from "../../shared/utils/validators";
+import { VALIDATOR_REQUIRE } from "../../shared/utils/validators";
 import { useForm } from "../../shared/hooks/form-hook";
-import "./PlaceForm.css";
+import "../../places/containers/PlaceForm.css";
 import Card from "../../shared/components/UIElements/Card";
 import { useHttp } from "../../shared/hooks/http-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
@@ -16,18 +13,17 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import { AuthContext } from "../../shared/context/auth-context";
 import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 
-const UpdatePlace = () => {
+const UpdateUser = () => {
   const auth = useContext(AuthContext);
   const { isLoading, isError, sendRequest, clearError } = useHttp();
-  const placeId = useParams().placeId;
-  const [fetchedPlace, updatefetchedPlace] = useState(undefined);
+  const location = useLocation();
+  const userId = location.pathname.substring(17);
+  const [fetchedUser, updateFetchedUser] = useState(undefined);
   const history = useHistory();
   const [formState, inputHandler, setFormData] = useForm(
     {
-      title: { value: "", isValid: false },
-      type: { value: "", isValid: true },
-      description: { value: "", isValid: true },
-      address: { value: "", isValid: false },
+      email: { value: "", isValid: false },
+      name: { value: "", isValid: true },
       about: { value: "", isValid: false },
       image: { value: null, isValid: true },
     },
@@ -35,32 +31,24 @@ const UpdatePlace = () => {
   );
 
   useEffect(() => {
-    const fetchPlace = async () => {
+    const fetchUserData = async () => {
       try {
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/api/places/${placeId}`
+          `${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`
         );
-        updatefetchedPlace(responseData.place);
+        updateFetchedUser(responseData.user);
         setFormData(
           {
-            title: {
-              value: responseData.place.title,
+            email: {
+              value: responseData.user.email,
               isValid: true,
             },
-            description: {
-              value: responseData.place.description,
+            name: {
+              value: responseData.user.name,
               isValid: true,
             },
             about: {
-              value: responseData.place.about,
-              isValid: true,
-            },
-            address: {
-              value: responseData.place.address,
-              isValid: true,
-            },
-            type: {
-              value: responseData.place.type,
+              value: responseData.user.about,
               isValid: true,
             },
           },
@@ -68,39 +56,37 @@ const UpdatePlace = () => {
         );
       } catch (e) {}
     };
-    fetchPlace();
-  }, [placeId, sendRequest, setFormData]);
+    fetchUserData();
+  }, [sendRequest, userId, setFormData]);
 
-  const placeUpdateSubmitHandler = async (e) => {
+  const userUpdateSubmitHandler = async (e) => {
     e.preventDefault();
     try {
       const formData = new FormData();
-      formData.append("title", formState.inputs.title.value);
-      formData.append("description", formState.inputs.description.value);
+      formData.append("name", formState.inputs.name.value);
+      formData.append("email", formState.inputs.email.value);
       formData.append("about", formState.inputs.about.value);
-      formData.append("type", formState.inputs.type.value);
-      formData.append("address", formState.inputs.address.value);
       formData.append(
         "image",
         formState.inputs.image ? formState.inputs.image.value : "leave"
       );
       await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/api/places/${placeId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`,
         "PATCH",
         formData,
         {
           Authorization: `Bearer ${auth.token}`,
         }
       );
-      history.push(`/${auth.userId}/places`);
+      history.push(`/userdetails/${userId}`);
     } catch (e) {}
   };
 
-  if (!fetchedPlace && !isError) {
+  if (!fetchedUser && !isError) {
     return (
       <div className="center">
         <Card>
-          <h2>Could not find the place</h2>
+          <h2>Could not find the user</h2>
         </Card>
       </div>
     );
@@ -114,57 +100,36 @@ const UpdatePlace = () => {
         </div>
       )}
       <ErrorModal error={isError} onClear={clearError} />
-      {!isLoading && fetchedPlace && (
-        <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
+      {!isLoading && fetchedUser && (
+        <form className="place-form" onSubmit={userUpdateSubmitHandler}>
           <Input
-            id="title"
+            id="email"
             element="input"
             type="text"
-            label="Title"
+            label="Email"
             validators={[VALIDATOR_REQUIRE()]}
             errorText="Please enter a valid title."
             onInput={inputHandler}
-            initialValue={fetchedPlace.title}
+            initialValue={fetchedUser.email}
             initialValid={true}
           />
           <Input
-            id="type"
-            element="select"
+            id="name"
+            element="input"
             type="text"
-            label="Type"
+            label="Name"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Please enter a valid title."
             onInput={inputHandler}
-            options={["Monument", "Site", "Event", "Other"]}
-            initialValue={fetchedPlace.type}
+            initialValue={fetchedUser.name}
             initialValid={true}
-            validators={""}
           />
           <Input
             id="about"
             label="About"
             element="textarea"
-            validators={[VALIDATOR_MINLENGTH(5)]}
-            errorText="Please enter a short description (at least 5 characters)."
             onInput={inputHandler}
-            initialValue={fetchedPlace.about}
-            initialValid={true}
-          />
-          <Input
-            id="address"
-            type="text"
-            label="Address"
-            element="input"
-            validators={[VALIDATOR_REQUIRE()]}
-            initialValue={fetchedPlace.address}
-            initialValid={true}
-            errorText="Please enter a valid address."
-            onInput={inputHandler}
-          />
-          <Input
-            id="description"
-            label="Description"
-            element="textarea"
-            onInput={inputHandler}
-            initialValue={fetchedPlace.description}
+            initialValue={fetchedUser.about}
             initialValid={true}
             errorText="Provide a description if you feel like it."
             validators={""}
@@ -185,4 +150,4 @@ const UpdatePlace = () => {
   );
 };
 
-export default UpdatePlace;
+export default UpdateUser;

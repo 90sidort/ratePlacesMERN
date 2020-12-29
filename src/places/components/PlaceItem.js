@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 
 import Card from "../../shared/components/UIElements/Card";
 import Button from "../../shared/components/FormElements/Button";
@@ -6,10 +7,10 @@ import Modal from "../../shared/components/UIElements/Modal";
 import MapboxGLMap from "../../shared/components/UIElements/Map";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useHttp } from "../../shared/hooks/http-hook";
-
-import "./PlaceItem.css";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+
+import "./PlaceItem.css";
 
 const PlaceItem = (props) => {
   const auth = useContext(AuthContext);
@@ -53,7 +54,6 @@ const PlaceItem = (props) => {
 
     setIsLiked(isLiked ? false : true);
   };
-
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />
@@ -92,24 +92,26 @@ const PlaceItem = (props) => {
         </Modal>
         <Card className="place-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
-          <div className="place-item__image">
-            <img
-              src={
-                props.image !== "placeholder"
-                  ? `${process.env.REACT_APP_BACKEND_URL}/${props.image}`
-                  : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/tundra.jpg`
-              }
-              alt={props.title}
-            />
-          </div>
-          <div className="place-item__info">
-            <h2>{props.title}</h2>
-            <h3>{props.address}</h3>
-            <p>{props.about}</p>
-            <small>
-              {likesCount} {likesCount !== 1 ? "likes" : "like"}
-            </small>
-          </div>
+          <Link to={`/placedetails/${props.id}`}>
+            <div className="place-item__image">
+              <img
+                src={
+                  props.image !== "placeholder"
+                    ? `${process.env.REACT_APP_BACKEND_URL}/${props.image}`
+                    : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/tundra.jpg`
+                }
+                alt={props.title}
+              />
+            </div>
+            <div className="place-item__info">
+              <h2>{props.title}</h2>
+              <h3>{props.address}</h3>
+              <p>{props.about}</p>
+              <small>
+                {likesCount} {likesCount !== 1 ? "likes" : "like"}
+              </small>
+            </div>
+          </Link>
           <div className="place-item__actions">
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP

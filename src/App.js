@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Users from "./users/containers/Users";
 import NewPlace from "./places/containers/NewPlace";
@@ -14,6 +9,9 @@ import UpdatePlace from "./places/containers/UpdatePlace";
 import Auth from "./users/containers/Auth";
 import { AuthContext } from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
+import PlaceDetails from "./places/components/PlaceDetails";
+import UserInfo from "./users/containers/UserInfo";
+import UpdateUser from "./users/containers/UpdateUser";
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -35,7 +33,15 @@ const App = () => {
         <Route path="/places/:placeId" exact={true}>
           <UpdatePlace />
         </Route>
-        <Redirect to={"/"} />
+        <Route path="/placedetails/:placeId" exact={true}>
+          <PlaceDetails />
+        </Route>
+        <Route path="/userdetails/:userId" exact={true}>
+          <UserInfo />
+        </Route>
+        <Route path="/editUserDetails/:userId" exact={true}>
+          <UpdateUser />
+        </Route>
       </Switch>
     );
   } else {
@@ -50,7 +56,16 @@ const App = () => {
         <Route path="/auth" exact={true}>
           <Auth />
         </Route>
-        <Redirect to={"/auth"} />
+        <Route path="/placedetails/:placeId" exact={true}>
+          <PlaceDetails />
+        </Route>
+        <Route path="/userdetails/:userId" exact={true}>
+          <UserInfo />
+        </Route>
+        <Route path="/editUserDetails/:userId" exact={true}>
+          <UpdateUser />
+        </Route>
+        {/* <Redirect to={"/auth"} /> */}
       </Switch>
     );
   }

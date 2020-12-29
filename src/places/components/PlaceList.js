@@ -45,6 +45,7 @@ const PlaceList = (props) => {
             coordinates={place.location}
             likes={place.likes}
             onDelete={props.onDeletePlace}
+            comments={place.comments}
           />
         ))}
       </ul>

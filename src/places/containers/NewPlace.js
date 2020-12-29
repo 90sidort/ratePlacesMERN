@@ -99,8 +99,7 @@ const NewPlace = () => {
           label="Description"
           element="textarea"
           onInput={inputHandler}
-          // errorText="Provide a description if you feel like it."
-          // validators={""}
+          validators={""}
         />
         <ImageUpload
           id="image"
