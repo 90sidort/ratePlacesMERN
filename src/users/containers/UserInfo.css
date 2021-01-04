@@ -1,0 +1,25 @@
+.user-info__content {
+  padding: 3rem;
+  margin: 2rem 20rem;
+  text-align: left;
+}
+
+.user-info__item {
+  float: left;
+}
+
+.user-info__edit {
+  margin-left: 2rem;
+}
+
+.user-info__likes {
+  margin: 1rem 5rem;
+}
+
+@media (max-width: 768px) {
+  .user-info__content {
+    padding: 3rem;
+    margin: 2rem 2rem;
+    text-align: left;
+  }
+}
