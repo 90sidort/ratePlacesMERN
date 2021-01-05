@@ -72,7 +72,7 @@ const UserInfo = () => {
             invert
             onClick={() => history.push(`/editUserDetails/${userId}`)}
           >
-            EDIT
+            EDIT PROFILE
           </Button>
         </div>
       )}

@@ -7,7 +7,7 @@ import { mapboxToken } from "../../../config";
 const styles = {
   width: "30vw",
   height: "calc(30vh - 80px)",
-  position: "absolute",
+  margin: "auto",
 };
 
 const MapboxGLMap = (props) => {

@@ -1,0 +1,55 @@
+.place-details__content {
+  width: 60rem;
+  padding: 3rem;
+  margin: 2rem auto;
+  text-align: center;
+  box-sizing: content-box;
+}
+
+.place-details__form {
+  list-style: none;
+  margin: 0 auto;
+  padding: 1rem;
+  width: 90%;
+  max-width: 60rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  background: white;
+}
+
+.place-details__comment {
+  background-color: blanchedalmond;
+  width: 60rem;
+  margin: 2rem auto;
+  text-align: left;
+  box-sizing: content-box;
+}
+
+.place-details__comment button {
+  background-color: #ff0055;
+  color: aliceblue;
+  border-radius: 5px;
+  border-color: #ff008c;
+}
+
+.place-details__image {
+  width: 30rem;
+  height: 30rem;
+}
+
+@media (max-width: 768px) {
+  .place-details__content {
+    max-width: 40rem;
+    width: 70%;
+    margin: 1rem auto;
+  }
+  .place-details__comment {
+    max-width: 40rem;
+    width: 70%;
+    margin: 1rem auto;
+  }
+  .place-details__image {
+    width: 10rem;
+    height: 10rem;
+  }
+}

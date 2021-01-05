@@ -7,6 +7,9 @@ import { useHttp } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import Card from "../../shared/components/UIElements/Card";
+
+import "./PlaceDetails.css";
 
 const PlaceDetails = () => {
   const location = useLocation();
@@ -76,36 +79,43 @@ const PlaceDetails = () => {
       <ErrorModal error={isError} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
       <div>
-        <h1>{placeDetails.title}</h1>
-        <h3>{placeDetails.about}</h3>
-        {placeDetails.likes && (
-          <p>
-            This place has {placeDetails.likes.length}{" "}
-            {placeDetails.likes.length === 1 ? "like" : "likes"}
-          </p>
-        )}
-        {placeDetails.image && (
-          <img
-            src={
-              placeDetails.image !== "placeholder"
-                ? `${process.env.REACT_APP_BACKEND_URL}/${placeDetails.image}`
-                : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/tundra.jpg`
-            }
-            alt={placeDetails.title}
-          />
-        )}
-        {placeDetails.location && (
-          <div className="map-container">
-            <MapboxGLMap
-              coordinates={[
-                placeDetails.location.lat,
-                placeDetails.location.lng,
-              ]}
+        <Card className="place-details__content">
+          <h1>{placeDetails.title}</h1>
+          <h3>{placeDetails.about}</h3>
+          {placeDetails.likes && (
+            <p>
+              This place has {placeDetails.likes.length}{" "}
+              {placeDetails.likes.length === 1 ? "like" : "likes"}
+            </p>
+          )}
+          {placeDetails.image && (
+            <img
+              src={
+                placeDetails.image !== "placeholder"
+                  ? `${process.env.REACT_APP_BACKEND_URL}/${placeDetails.image}`
+                  : `${process.env.REACT_APP_BACKEND_URL}/uploads/images/tundra.jpg`
+              }
+              alt={placeDetails.title}
+              className="place-details__image"
             />
-          </div>
-        )}
-        <p>{placeDetails.description}</p>
-        <form className="place-form" onSubmit={addCommentHandler}>
+          )}
+        </Card>
+        <Card className="place-details__content">
+          {placeDetails.location && (
+            <div className="map-container">
+              <MapboxGLMap
+                coordinates={[
+                  placeDetails.location.lat,
+                  placeDetails.location.lng,
+                ]}
+              />
+            </div>
+          )}
+        </Card>
+        <Card className="place-details__content">
+          <p>{placeDetails.description}</p>
+        </Card>
+        <form className="place-details__form" onSubmit={addCommentHandler}>
           <div className={`form-control`}>
             <label htmlFor="comment">Comment</label>
             <input id="comment" type="text" onChange={onCommentChangeHandler} />
@@ -117,17 +127,30 @@ const PlaceDetails = () => {
         {placeDetails.comments && (
           <div>
             {placeDetails.comments.map((comment) => {
+              console.log(comment);
               return (
-                <div key={comment._id}>
-                  <p>{comment.text}</p>
-                  <button
-                    onClick={() => {
-                      delCommentHandler(comment._id);
-                    }}
-                  >
-                    X
-                  </button>
-                </div>
+                <Card key={comment._id} className="place-details__comment">
+                  <div>
+                    <div style={{ float: "left", width: "95%" }}>
+                      <p>{comment.text}</p>
+                    </div>
+                    <div
+                      style={{
+                        float: "left",
+                        width: "5%",
+                        marginTop: "0.8rem",
+                      }}
+                    >
+                      <button
+                        onClick={() => {
+                          delCommentHandler(comment._id);
+                        }}
+                      >
+                        X
+                      </button>
+                    </div>
+                  </div>
+                </Card>
               );
             })}
           </div>

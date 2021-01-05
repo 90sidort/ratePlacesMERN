@@ -1,6 +1,7 @@
 .user-info__content {
+  width: 40rem;
   padding: 3rem;
-  margin: 2rem 20rem;
+  margin: 2rem auto;
   text-align: left;
 }
 
@@ -9,17 +10,19 @@
 }
 
 .user-info__edit {
-  margin-left: 2rem;
+  text-align: center;
 }
 
 .user-info__likes {
-  margin: 1rem 5rem;
+  margin: 1rem auto;
+  width: 40rem;
 }
 
 @media (max-width: 768px) {
-  .user-info__content {
-    padding: 3rem;
-    margin: 2rem 2rem;
-    text-align: left;
+  .user-info__content,
+  .user-info__likes {
+    max-width: 40 rem;
+    width: 90%;
+    margin: 1rem auto;
   }
 }
