@@ -19,7 +19,7 @@ import UserInfo from "./users/containers/UserInfo";
 import UpdateUser from "./users/containers/UpdateUser";
 
 const App = () => {
-  const { token, login, logout, userId } = useAuth();
+  const { token, login, logout, userId, userName } = useAuth();
 
   let routes;
 
@@ -78,7 +78,7 @@ const App = () => {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn: !!token, token, userId, login, logout }}
+      value={{ isLoggedIn: !!token, token, userId, login, logout, userName }}
     >
       <Router>
         <MainNavigation />

@@ -67,7 +67,11 @@ const Auth = () => {
           }),
           { "Content-Type": "application/json" }
         );
-        auth.login(responseData.userId, responseData.token);
+        auth.login(
+          responseData.userId,
+          responseData.token,
+          responseData.userName
+        );
         history.push("/");
       } catch (e) {}
     } else {

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 import MapboxGLMap from "../../shared/components/UIElements/Map";
 import Button from "../../shared/components/FormElements/Button";
@@ -13,6 +13,7 @@ import "./PlaceDetails.css";
 
 const PlaceDetails = () => {
   const location = useLocation();
+  const history = useHistory();
   const placeId = location.pathname.substring(14);
   const [placeDetails, setPlaceDetails] = useState({});
   const [commentInput, setCommentInput] = useState("");
@@ -41,6 +42,7 @@ const PlaceDetails = () => {
       const body = JSON.stringify({
         comment: commentInput,
         userId: auth.userId,
+        userName: auth.userName,
       });
       const res = await sendRequest(
         `${process.env.REACT_APP_BACKEND_URL}/api/places/comments/${placeId}`,
@@ -99,6 +101,14 @@ const PlaceDetails = () => {
               className="place-details__image"
             />
           )}
+          <div>
+            <Button
+              invert
+              onClick={() => history.push(`/${placeDetails.creator}/places`)}
+            >
+              OTHER PLACES
+            </Button>
+          </div>
         </Card>
         <Card className="place-details__content">
           {placeDetails.location && (
@@ -127,28 +137,37 @@ const PlaceDetails = () => {
         {placeDetails.comments && (
           <div>
             {placeDetails.comments.map((comment) => {
-              console.log(comment);
               return (
                 <Card key={comment._id} className="place-details__comment">
                   <div>
                     <div style={{ float: "left", width: "95%" }}>
-                      <p>{comment.text}</p>
+                      <p>
+                        <Link
+                          to={`/userdetails/${comment.postedBy}`}
+                          style={{ textDecoration: "none", color: "black" }}
+                        >
+                          <strong>{`${comment.userName} said: `}</strong>
+                        </Link>
+                        {comment.text}
+                      </p>
                     </div>
-                    <div
-                      style={{
-                        float: "left",
-                        width: "5%",
-                        marginTop: "0.8rem",
-                      }}
-                    >
-                      <button
-                        onClick={() => {
-                          delCommentHandler(comment._id);
+                    {comment.postedBy === auth.userId && (
+                      <div
+                        style={{
+                          float: "left",
+                          width: "5%",
+                          marginTop: "0.8rem",
                         }}
                       >
-                        X
-                      </button>
-                    </div>
+                        <button
+                          onClick={() => {
+                            delCommentHandler(comment._id);
+                          }}
+                        >
+                          X
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </Card>
               );
