@@ -55,6 +55,7 @@ const PlaceItem = (props) => {
     setIsLiked(isLiked ? false : true);
   };
   const isPopular = props.popular;
+  console.log(props);
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />

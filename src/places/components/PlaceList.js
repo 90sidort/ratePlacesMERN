@@ -34,9 +34,9 @@ const PlaceList = (props) => {
         {props.places.map((place) => (
           <PlaceItem
             popular={props.popular}
-            key={place.id}
+            key={place._id}
             type={place.type}
-            id={place.id}
+            id={place._id}
             image={place.image}
             title={place.title}
             address={place.address}
