@@ -61,6 +61,7 @@ const PlaceDetails = () => {
   const delCommentHandler = async (commentId) => {
     const body = JSON.stringify({
       cid: commentId,
+      userId: auth.userId,
     });
     try {
       const res = await sendRequest(
