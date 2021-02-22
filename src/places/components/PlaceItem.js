@@ -54,6 +54,7 @@ const PlaceItem = (props) => {
 
     setIsLiked(isLiked ? false : true);
   };
+  const isPopular = props.popular;
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />
@@ -116,20 +117,20 @@ const PlaceItem = (props) => {
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            {auth.userId && isLiked && (
+            {auth.userId && isLiked && !isPopular && (
               <Button like onClick={likeUnlikeHandler}>
                 Unlike
               </Button>
             )}
-            {auth.userId && !isLiked && (
+            {auth.userId && !isLiked && !isPopular && (
               <Button unlike onClick={likeUnlikeHandler}>
                 Like
               </Button>
             )}
-            {auth.userId === props.creatorId && (
+            {auth.userId === props.creatorId && !isPopular && (
               <Button to={`/places/${props.id}`}>EDIT</Button>
             )}
-            {auth.userId === props.creatorId && (
+            {auth.userId === props.creatorId && !isPopular && (
               <Button danger onClick={showModalHandler}>
                 DELETE
               </Button>

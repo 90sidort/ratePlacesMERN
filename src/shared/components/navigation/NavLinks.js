@@ -15,6 +15,9 @@ const NavLinks = (props) => {
         </li>
       )}
       <li>
+        <NavLink to={`/places/popular`}>POPULAR</NavLink>
+      </li>
+      <li>
         <NavLink to="/" exact>
           ALL USERS
         </NavLink>

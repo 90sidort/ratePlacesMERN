@@ -17,6 +17,7 @@ import { useAuth } from "./shared/hooks/auth-hook";
 import PlaceDetails from "./places/components/PlaceDetails";
 import UserInfo from "./users/containers/UserInfo";
 import UpdateUser from "./users/containers/UpdateUser";
+import PopularPlaces from "./places/containers/PopularPlaces";
 
 const App = () => {
   const { token, login, logout, userId, userName } = useAuth();
@@ -34,6 +35,9 @@ const App = () => {
         </Route>
         <Route path="/places/new" exact={true}>
           <NewPlace />
+        </Route>
+        <Route path="/places/popular" exact={true}>
+          <PopularPlaces />
         </Route>
         <Route path="/places/:placeId" exact={true}>
           <UpdatePlace />

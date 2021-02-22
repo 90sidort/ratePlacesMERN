@@ -33,6 +33,7 @@ const PlaceList = (props) => {
       <ul className="place-list">
         {props.places.map((place) => (
           <PlaceItem
+            popular={props.popular}
             key={place.id}
             type={place.type}
             id={place.id}
