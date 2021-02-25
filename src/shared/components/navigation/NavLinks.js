@@ -14,9 +14,16 @@ const NavLinks = (props) => {
           <NavLink to={`/userdetails/${auth.userId}`}>PROFILE</NavLink>
         </li>
       )}
-      <li>
-        <NavLink to={`/places/popular`}>POPULAR</NavLink>
-      </li>
+      {auth.isLoggedIn && (
+        <li>
+          <NavLink to={`/places/popular`}>PLACE RANKING</NavLink>
+        </li>
+      )}
+      {auth.isLoggedIn && (
+        <li>
+          <NavLink to={`/users/popular`}>USER RANKING</NavLink>
+        </li>
+      )}
       <li>
         <NavLink to="/" exact>
           ALL USERS

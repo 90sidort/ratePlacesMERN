@@ -18,6 +18,7 @@ import PlaceDetails from "./places/components/PlaceDetails";
 import UserInfo from "./users/containers/UserInfo";
 import UpdateUser from "./users/containers/UpdateUser";
 import PopularPlaces from "./places/containers/PopularPlaces";
+import PopularUsers from "./users/containers/PopularUsers";
 
 const App = () => {
   const { token, login, logout, userId, userName } = useAuth();
@@ -38,6 +39,9 @@ const App = () => {
         </Route>
         <Route path="/places/popular" exact={true}>
           <PopularPlaces />
+        </Route>
+        <Route path="/users/popular" exact={true}>
+          <PopularUsers />
         </Route>
         <Route path="/places/:placeId" exact={true}>
           <UpdatePlace />
@@ -66,15 +70,6 @@ const App = () => {
         <Route path="/auth" exact={true}>
           <Auth />
         </Route>
-        {/* <Route path="/placedetails/:placeId" exact={true}>
-          <PlaceDetails />
-        </Route>
-        <Route path="/userdetails/:userId" exact={true}>
-          <UserInfo />
-        </Route>
-        <Route path="/editUserDetails/:userId" exact={true}>
-          <UpdateUser />
-        </Route> */}
         <Redirect to={"/auth"} />
       </Switch>
     );
