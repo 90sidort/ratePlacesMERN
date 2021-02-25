@@ -11,7 +11,12 @@ const NavLinks = (props) => {
     <ul className="nav-links">
       {auth.isLoggedIn && (
         <li>
-          <NavLink to={`/userdetails/${auth.userId}`}>PROFILE</NavLink>
+          <NavLink
+            to={`/userdetails/${auth.userId}`}
+            data-test="profileNavigation"
+          >
+            PROFILE
+          </NavLink>
         </li>
       )}
       {auth.isLoggedIn && (
@@ -43,7 +48,7 @@ const NavLinks = (props) => {
       )}
       {!auth.isLoggedIn && (
         <li>
-          <NavLink to="/auth" exact>
+          <NavLink to="/auth" data-test="signInNavigation" exact>
             SIGN IN
           </NavLink>
         </li>

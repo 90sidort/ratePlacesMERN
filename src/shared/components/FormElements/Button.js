@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./Button.css";
 
 const Button = (props) => {
+  console.log(props);
   if (props.href) {
     return (
       <a
@@ -39,6 +40,7 @@ const Button = (props) => {
       type={props.type}
       onClick={props.onClick}
       disabled={props.disabled}
+      data-test={props.dataTest}
     >
       {props.children}
     </button>

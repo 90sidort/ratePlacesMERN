@@ -9,8 +9,8 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useForm } from "../../shared/hooks/form-hook";
 import {
   VALIDATOR_EMAIL,
+  VALIDATOR_MAXLENGTH,
   VALIDATOR_MINLENGTH,
-  VALIDATOR_REQUIRE,
 } from "../../shared/utils/validators";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useHttp } from "../../shared/hooks/http-hook";
@@ -25,6 +25,7 @@ const Auth = () => {
   const { isLoading, isError, sendRequest, clearError } = useHttp();
   const [formState, inputHandler, setFormData] = useForm(
     {
+      name: { value: "", isValid: isAuth },
       email: { value: "", isValid: false },
       password: { value: "", isValid: false },
     },
@@ -98,22 +99,23 @@ const Auth = () => {
         {isLoading && <LoadingSpinner asOverlay />}
         <form onSubmit={authSubmitHandler}>
           {!isAuth && (
-            <Input
-              element="input"
-              type="text"
-              id="name"
-              label="Name"
-              validators={[VALIDATOR_REQUIRE]}
-              errorText="Please enter a valid name."
-              onInput={inputHandler}
-            />
-          )}
-          {!isAuth && (
             <ImageUpload
               id="image"
               center
               onInput={inputHandler}
               errorText="Please provide an image."
+            />
+          )}
+          {!isAuth && (
+            <Input
+              element="input"
+              type="text"
+              id="name"
+              label="Name"
+              validators={[VALIDATOR_MINLENGTH(5), VALIDATOR_MAXLENGTH(100)]}
+              errorText="Please enter a valid name (at least 5 characters, max 100 characters)."
+              onInput={inputHandler}
+              dataTest="inputUserName"
             />
           )}
           <Input
@@ -124,21 +126,31 @@ const Auth = () => {
             validators={[VALIDATOR_EMAIL()]}
             errorText="Please enter a valid email."
             onInput={inputHandler}
+            dataTest="inputEmail"
           />{" "}
           <Input
             id="password"
             type="password"
             label="Password"
             element="input"
-            validators={[VALIDATOR_MINLENGTH(6)]}
-            errorText="Please enter a valid password (at least 6 characters)."
+            validators={[VALIDATOR_MINLENGTH(6), VALIDATOR_MAXLENGTH(16)]}
+            errorText="Please enter a valid password (at least 6 characters, max 16 characters)."
             onInput={inputHandler}
+            dataTest="inputPassword"
           />
-          <Button type="submit" disabled={!formState.isValid}>
+          <Button
+            type="submit"
+            disabled={!formState.isValid}
+            dataTest={`button${isAuth ? "SignIn" : "SignUp"}`}
+          >
             {isAuth ? "SIGN IN" : "SIGN UP"}
           </Button>
         </form>
-        <Button inverse onClick={isAuthHandler}>
+        <Button
+          inverse
+          onClick={isAuthHandler}
+          dataTest={`button${!isAuth ? "SignIn" : "SignUp"}`}
+        >
           {isAuth ? "SIGN UP" : "SIGN IN"}
         </Button>
       </Card>

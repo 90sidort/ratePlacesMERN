@@ -1,0 +1,11 @@
+{
+    "baseUrl": "http://localhost:3000/",
+    "supportFile": "cypress/support/index.js",
+    "video": false,
+    "screenshotOnRunFailure": false,
+    "watchForFileChanges": false,
+    "integrationFolder": "cypress/integration/functional",
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "testFiles": "**/*.feature"
+}
