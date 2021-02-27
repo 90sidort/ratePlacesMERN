@@ -3,6 +3,7 @@ import { defineStep } from "cypress-cucumber-preprocessor/steps";
 import { elementFinder } from "../utils/element.utils";
 import { textFinder } from "../utils/text.utils";
 import { urlFinder } from "../utils/url.utils";
+import { modalError } from "../variables/common.variables";
 
 defineStep("User opens app", () => {
   cy.intercept("GET", "**//api/users/").as("getUsers");
@@ -33,4 +34,9 @@ defineStep("User defocuses last field", () => {
 
 defineStep("{string} form error is shown", (errorElement) => {
   cy.get(`p[data-test="error_${errorElement}"]`).should("be.visible");
+});
+
+defineStep("Error modal {string} is shown", (errorType) => {
+  cy.get(modalError).should("be.visible");
+  cy.get("p").contains(textFinder(errorType));
 });

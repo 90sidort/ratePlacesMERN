@@ -1,9 +1,11 @@
+import { okayButton } from "../variables/common.variables";
 import {
   signInNavigation,
   signUpButton,
   inputUserName,
   inputEmail,
   inputPassword,
+  signInButton,
 } from "../variables/sign.variables";
 
 export const elementFinder = (elementName) => {
@@ -17,5 +19,9 @@ export const elementFinder = (elementName) => {
     return inputEmail;
   } else if (elementName === "password input") {
     return inputPassword;
+  } else if (elementName === "Sign in button") {
+    return signInButton;
+  } else if (elementName === "Okay button") {
+    return okayButton;
   }
 };

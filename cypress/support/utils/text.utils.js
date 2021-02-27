@@ -5,6 +5,14 @@ import {
   incorrectUsername,
   incorrectEmail,
   incorrectPassword,
+  validEmail,
+  validPassword,
+  invalidEmail,
+  invalidPassword,
+  userDsntExist,
+  wrngPassword,
+  rchvdEmail,
+  rchvdUser,
 } from "../variables/sign.variables";
 
 export const textFinder = (textName) => {
@@ -20,5 +28,21 @@ export const textFinder = (textName) => {
     return incorrectEmail;
   } else if (textName === "incorrect password") {
     return incorrectPassword;
+  } else if (textName === "valid email") {
+    return validEmail;
+  } else if (textName === "valid password") {
+    return validPassword;
+  } else if (textName === "invalid email") {
+    return invalidEmail;
+  } else if (textName === "invalid password") {
+    return invalidPassword;
+  } else if (textName === "user does not exist") {
+    return userDsntExist;
+  } else if (textName === "wrong password") {
+    return wrngPassword;
+  } else if (textName === "archived email") {
+    return rchvdEmail;
+  } else if (textName === "archived user") {
+    return rchvdUser;
   }
 };
