@@ -13,3 +13,6 @@ export const allUsersURL = "/";
 export const correctUsername = "TestTryUserName";
 export const correctEmail = "testTryEmail@test.com";
 export const correctPassword = "testCorrectPass";
+export const incorrectUsername = "ThisUserCertainlyDoesNotExistNoDoubt";
+export const incorrectEmail = "thisIsAnIncorrectEmail";
+export const incorrectPassword = "short";

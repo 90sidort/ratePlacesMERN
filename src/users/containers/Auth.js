@@ -112,8 +112,8 @@ const Auth = () => {
               type="text"
               id="name"
               label="Name"
-              validators={[VALIDATOR_MINLENGTH(5), VALIDATOR_MAXLENGTH(100)]}
-              errorText="Please enter a valid name (at least 5 characters, max 100 characters)."
+              validators={[VALIDATOR_MINLENGTH(5), VALIDATOR_MAXLENGTH(30)]}
+              errorText="Please enter a valid name (at least 5 characters, max 30 characters)."
               onInput={inputHandler}
               dataTest="inputUserName"
             />

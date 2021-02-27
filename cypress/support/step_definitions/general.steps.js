@@ -26,3 +26,11 @@ defineStep("{string} is {string}", (elementName, state) => {
   state = state === "enabled" ? "not.have.attr" : "have.attr";
   cy.get(elementFinder(elementName)).should(state, "disabled");
 });
+
+defineStep("User defocuses last field", () => {
+  cy.get('div[class="image-upload center"]').click();
+});
+
+defineStep("{string} form error is shown", (errorElement) => {
+  cy.get(`p[data-test="error_${errorElement}"]`).should("be.visible");
+});

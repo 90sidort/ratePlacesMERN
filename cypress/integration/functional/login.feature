@@ -19,21 +19,22 @@ Feature: Signup/ signin
         And "All users" page is displayed
         And Created user profile is visible
 
-# Scenario: User tries to sign up with incorrect data
-#     Given User opens app
-#     When User clicks "Sign in"
-#     Then "Sign in" page is displayed
-#     When User clicks "Sign up button"
-#     Then "Sign up" page is displayed
-#     When User provides "incorrect username"
-#     Then "Name" form error is shown
-#     And "Sign up button" is disabled
-#     When User provides "incorrect email"
-#     Then "Email" form error is shown
-#     And "Sign up button" is disabled
-#     When User provides "incorrect password"
-#     Then "Password" form error is shown
-#     And "Sign up button" is disabled
+    Scenario: User tries to sign up with incorrect data
+        Given User opens app
+        When User clicks "navigation Sign in"
+        Then "Sign in" page is displayed
+        When User clicks "Sign up button"
+        Then "Sign up" page is displayed
+        When User types "incorrect username" in "username input"
+        Then "Sign up button" is "disabled"
+        When User types "incorrect email" in "email input"
+        Then "Name" form error is shown
+        And "Sign up button" is "disabled"
+        When User types "incorrect password" in "password input"
+        Then "Email" form error is shown
+        And User defocuses last field
+        Then "Password" form error is shown
+        And "Sign up button" is "disabled"
 
 # Scenario: User logs in with correct data
 #     Given User opens app

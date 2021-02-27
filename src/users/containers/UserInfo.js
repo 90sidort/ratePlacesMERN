@@ -58,6 +58,22 @@ const UserInfo = () => {
     }
   }, [sendRequest, userDetails]);
 
+  const archiveAccount = async (e) => {
+    e.preventDefault();
+    try {
+      await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/api/users/archive/${userId}`,
+        "PATCH",
+        {},
+        {
+          Authorization: `Bearer ${auth.token}`,
+        }
+      );
+      auth.logout();
+      history.push(`/auth`);
+    } catch (e) {}
+  };
+
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />
@@ -66,16 +82,25 @@ const UserInfo = () => {
           <LoadingSpinner asOverlay />
         </div>
       )}
-      {auth.userId === userId && (
-        <div className="user-info__edit">
-          <Button
-            invert
-            onClick={() => history.push(`/editUserDetails/${userId}`)}
-          >
-            EDIT PROFILE
-          </Button>
-        </div>
-      )}
+      <div style={{ textAlign: "center" }}>
+        {auth.userId === userId && (
+          <div className="user-info__edit" style={{ display: "inline" }}>
+            <Button
+              invert
+              onClick={() => history.push(`/editUserDetails/${userId}`)}
+            >
+              EDIT
+            </Button>
+          </div>
+        )}
+        {auth.userId === userId && (
+          <div className="user-info__edit" style={{ display: "inline" }}>
+            <Button invert onClick={archiveAccount}>
+              ARCHIVE
+            </Button>
+          </div>
+        )}
+      </div>
       <Card className="user-info__content">
         {userDetails.image && (
           <div className="user-item__image-profile user-info__item">
