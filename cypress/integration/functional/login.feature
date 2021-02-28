@@ -1,7 +1,7 @@
 Feature: Signup/ signin
 
     As a user I want to be able to create an account and log in so I can use the app
-
+    @seed
     Scenario: User sings up with correct data
         Given User opens app
         When User clicks "navigation Sign in"
@@ -13,9 +13,9 @@ Feature: Signup/ signin
         When User types "correct email" in "email input"
         Then "Sign up button" is "disabled"
         And User types "correct password" in "password input"
-        Then "Sign up button" is "enabled"
+        And "Sign up button" is "enabled"
         When User clicks sign up to create account
-        And User is logged
+        Then User is logged
         And "All users" page is displayed
         And Created user profile is visible
 

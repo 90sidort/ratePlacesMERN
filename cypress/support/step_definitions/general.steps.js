@@ -1,9 +1,15 @@
-import { defineStep } from "cypress-cucumber-preprocessor/steps";
+import { defineStep, Before } from "cypress-cucumber-preprocessor/steps";
 
 import { elementFinder } from "../utils/element.utils";
 import { textFinder } from "../utils/text.utils";
 import { urlFinder } from "../utils/url.utils";
 import { modalError } from "../variables/common.variables";
+
+Before({ tags: "@seed" }, () => {
+  cy.task("seed:database").then(() => {
+    cy.wait(500);
+  });
+});
 
 defineStep("User opens app", () => {
   cy.intercept("GET", "**//api/users/").as("getUsers");

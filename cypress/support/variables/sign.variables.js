@@ -23,4 +23,4 @@ export const invalidPassword = "invalidTest";
 export const userDsntExist = "User does not exists.";
 export const wrngPassword = "Incorrect password!";
 export const rchvdUser = "This account has been archived.";
-export const rchvdEmail = "test1@gmail.com";
+export const rchvdEmail = "test3@gmail.com";
