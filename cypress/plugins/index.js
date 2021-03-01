@@ -10,7 +10,7 @@ const dropCollections = true;
 /**
  * @type {Cypress.PluginConfig}
  */
-console.log(mongouri);
+
 module.exports = (on, config) => {
   on("task", {
     "seed:database": () => {

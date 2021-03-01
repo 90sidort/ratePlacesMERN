@@ -112,6 +112,7 @@ const UpdateUser = () => {
             onInput={inputHandler}
             initialValue={fetchedUser.email}
             initialValid={true}
+            dataTest="updateEmailInput"
           />
           <Input
             id="name"
@@ -123,6 +124,7 @@ const UpdateUser = () => {
             onInput={inputHandler}
             initialValue={fetchedUser.name}
             initialValid={true}
+            dataTest="updateNameInput"
           />
           <Input
             id="about"
@@ -133,6 +135,7 @@ const UpdateUser = () => {
             initialValid={true}
             errorText="Provide a description if you feel like it."
             validators={""}
+            dataTest="updateAboutInput"
           />
           <ImageUpload
             id="image"

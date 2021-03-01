@@ -88,6 +88,7 @@ const UserInfo = () => {
             <Button
               invert
               onClick={() => history.push(`/editUserDetails/${userId}`)}
+              dataTest="editProfile"
             >
               EDIT
             </Button>
@@ -95,7 +96,7 @@ const UserInfo = () => {
         )}
         {auth.userId === userId && (
           <div className="user-info__edit" style={{ display: "inline" }}>
-            <Button invert onClick={archiveAccount}>
+            <Button invert onClick={archiveAccount} dataTest="archiveProfile">
               ARCHIVE
             </Button>
           </div>
@@ -125,6 +126,7 @@ const UserInfo = () => {
                 <Button
                   invert
                   onClick={() => history.push(`/${userId}/places`)}
+                  dataTest="seePlacesButton"
                 >
                   SEE PLACES
                 </Button>
@@ -141,7 +143,11 @@ const UserInfo = () => {
               <h3 style={{ textAlign: "center" }}>Follows</h3>
               <div>
                 {follow.followed.map((foll) => (
-                  <div className="user-info__item" key={foll._id}>
+                  <div
+                    className="user-info__item"
+                    key={foll._id}
+                    data-test={`follows_${foll.name}`}
+                  >
                     <Link
                       to={`/userdetails/${foll._id}`}
                       className="avatar-link"

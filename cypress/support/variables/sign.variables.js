@@ -9,6 +9,7 @@ export const cratedUserProfile = 'div[data-test="TestTryUserName_userCard"]';
 
 // Strings
 export const signInURL = "/auth";
+export const logInURL = "http://localhost:5000/api/users/login";
 export const allUsersURL = "/";
 export const correctUsername = "TestTryUserName";
 export const correctEmail = "testTryEmail@test.com";

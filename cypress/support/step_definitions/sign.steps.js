@@ -1,7 +1,15 @@
 import { defineStep } from "cypress-cucumber-preprocessor/steps";
 
 import { profileNavigation } from "../variables/profile.variables";
-import { cratedUserProfile, signUpButton } from "../variables/sign.variables";
+import {
+  cratedUserProfile,
+  inputEmail,
+  inputPassword,
+  signInButton,
+  signUpButton,
+  validEmail,
+  validPassword,
+} from "../variables/sign.variables";
 
 defineStep("User clicks sign up to create account", () => {
   cy.intercept("GET", "**/api/users/").as("getUsers");
@@ -15,4 +23,16 @@ defineStep("User is logged", () => {
 
 defineStep("Created user profile is visible", () => {
   cy.get(cratedUserProfile, { timeout: 10000 }).should("be.visible");
+});
+
+defineStep("User {string} is logged in", (user) => {
+  let login;
+  if (user === "two") {
+    login = validEmail;
+  }
+  cy.visit("/auth");
+  cy.get(inputEmail).type(login);
+  cy.get(inputPassword).type(validPassword);
+  cy.get(signInButton).click();
+  cy.url().should("eq", "http://localhost:3000/");
 });

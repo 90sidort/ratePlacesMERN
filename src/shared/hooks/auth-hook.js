@@ -9,7 +9,6 @@ export const useAuth = () => {
   const [userName, setUserName] = useState(null);
 
   const login = useCallback((uid, token, username, expirationDate) => {
-    console.log(uid, token, expirationDate, username);
     setToken(token);
     setUserId(uid);
     setUserName(username);
