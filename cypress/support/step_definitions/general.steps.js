@@ -46,3 +46,7 @@ defineStep("Error modal {string} is shown", (errorType) => {
   cy.get(modalError).should("be.visible");
   cy.get("p").contains(textFinder(errorType));
 });
+
+defineStep("User clears {string}", (elementName) => {
+  cy.get(elementFinder(elementName)).clear();
+});

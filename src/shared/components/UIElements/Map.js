@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-import { mapboxToken } from "../../../config";
+const mapboxToken = process.env.MAP_TOKEN;
 
 const styles = {
   width: "30vw",

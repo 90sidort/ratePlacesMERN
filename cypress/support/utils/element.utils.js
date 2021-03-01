@@ -1,4 +1,13 @@
 import { okayButton } from "../variables/common.variables";
+
+import {
+  archiveProfileButton,
+  editProfileButton,
+  inputAbout,
+  seePlacesButton,
+  updateUserButton,
+} from "../variables/profile.variables";
+
 import {
   signInNavigation,
   signUpButton,
@@ -23,5 +32,15 @@ export const elementFinder = (elementName) => {
     return signInButton;
   } else if (elementName === "Okay button") {
     return okayButton;
+  } else if (elementName === "see places button") {
+    return seePlacesButton;
+  } else if (elementName === "archive button") {
+    return archiveProfileButton;
+  } else if (elementName === "edit button") {
+    return editProfileButton;
+  } else if (elementName === "Update user button") {
+    return updateUserButton;
+  } else if (elementName === "about input") {
+    return inputAbout;
   }
 };

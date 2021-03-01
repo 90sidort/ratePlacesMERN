@@ -117,7 +117,7 @@ const UserInfo = () => {
         )}
         <div>
           <div>
-            <h2>{userDetails.name}</h2>
+            <h2 data-test="userNameProfile">{userDetails.name}</h2>
             {userDetails.places && (
               <div>
                 <p>{`This user has ${userDetails.places.length} ${
@@ -132,7 +132,7 @@ const UserInfo = () => {
                 </Button>
               </div>
             )}
-            <h4>{userDetails.about}</h4>
+            <h4 data-test="userAboutInfo">{userDetails.about}</h4>
           </div>
         </div>
       </Card>
@@ -180,6 +180,7 @@ const UserInfo = () => {
                     key={foll._id}
                     className="user-info__item"
                     style={{ margin: "1rem" }}
+                    data-test={`followed_${foll.name}`}
                   >
                     <Link
                       to={`/userdetails/${foll._id}`}

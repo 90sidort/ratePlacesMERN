@@ -3,7 +3,12 @@ import { useLocation, useHistory } from "react-router-dom";
 
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
-import { VALIDATOR_REQUIRE } from "../../shared/utils/validators";
+import {
+  VALIDATOR_REQUIRE,
+  VALIDATOR_EMAIL,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_MAXLENGTH,
+} from "../../shared/utils/validators";
 import { useForm } from "../../shared/hooks/form-hook";
 import "../../places/containers/PlaceForm.css";
 import Card from "../../shared/components/UIElements/Card";
@@ -107,24 +112,24 @@ const UpdateUser = () => {
             element="input"
             type="text"
             label="Email"
-            validators={[VALIDATOR_REQUIRE()]}
+            validators={[VALIDATOR_EMAIL()]}
             errorText="Please enter a valid email."
             onInput={inputHandler}
             initialValue={fetchedUser.email}
             initialValid={true}
-            dataTest="updateEmailInput"
+            dataTest="inputEmail"
           />
           <Input
             id="name"
             element="input"
             type="text"
             label="Name"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter a valid name."
+            validators={[VALIDATOR_MINLENGTH(5), VALIDATOR_MAXLENGTH(30)]}
+            errorText="Please enter a valid name (at least 5 characters, max 30 characters)."
             onInput={inputHandler}
             initialValue={fetchedUser.name}
             initialValid={true}
-            dataTest="updateNameInput"
+            dataTest="inputUserName"
           />
           <Input
             id="about"
@@ -135,7 +140,7 @@ const UpdateUser = () => {
             initialValid={true}
             errorText="Provide a description if you feel like it."
             validators={""}
-            dataTest="updateAboutInput"
+            dataTest="inputAbout"
           />
           <ImageUpload
             id="image"
@@ -144,7 +149,11 @@ const UpdateUser = () => {
             onInput={inputHandler}
             errorText="Please provide an image."
           />
-          <Button type="submit" disabled={!formState.isValid}>
+          <Button
+            type="submit"
+            disabled={!formState.isValid}
+            dataTest="updateUserButton"
+          >
             UPDATE USER
           </Button>
         </form>

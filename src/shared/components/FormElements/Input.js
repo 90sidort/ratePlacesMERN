@@ -70,6 +70,7 @@ const Input = (props) => {
         onChange={changeHandler}
         onBlur={props.id !== "description" ? touchHandler : () => {}}
         value={inputState.value}
+        data-test={props.dataTest}
       />
     );
   } else if (props.element === "select") {

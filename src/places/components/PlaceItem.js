@@ -92,7 +92,7 @@ const PlaceItem = (props) => {
         >
           <p>Please confirm deletetion.</p>
         </Modal>
-        <Card className="place-item__content">
+        <Card className="place-item__content" dataTest="placeItem">
           {isLoading && <LoadingSpinner asOverlay />}
           <Link to={`/placedetails/${props.id}`}>
             <div className="place-item__image">

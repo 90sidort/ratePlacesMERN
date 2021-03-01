@@ -36,3 +36,7 @@ defineStep("User {string} is logged in", (user) => {
   cy.get(signInButton).click();
   cy.url().should("eq", "http://localhost:3000/");
 });
+
+defineStep("User is logged out", () => {
+  cy.get(profileNavigation).should("not.exist");
+});

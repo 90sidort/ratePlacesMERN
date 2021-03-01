@@ -1,4 +1,9 @@
 import {
+  changedAbout,
+  changedEmail,
+  changedName,
+} from "../variables/profile.variables";
+import {
   correctEmail,
   correctUsername,
   correctPassword,
@@ -44,5 +49,11 @@ export const textFinder = (textName) => {
     return rchvdEmail;
   } else if (textName === "archived user") {
     return rchvdUser;
+  } else if (textName === "changed email") {
+    return changedEmail;
+  } else if (textName === "changed name") {
+    return changedName;
+  } else if (textName === "changed about") {
+    return changedAbout;
   }
 };
