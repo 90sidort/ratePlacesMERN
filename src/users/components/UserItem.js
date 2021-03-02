@@ -7,7 +7,7 @@ import "./UserItem.css";
 
 const UserItem = (props) => {
   return (
-    <li className="user-item">
+    <li className="user-item" data-test="userProfile">
       <Card className="user-item__content" dataTest={`${props.name}_userCard`}>
         <Link to={`/${props.id}/places`}>
           <div className="user-item__image">
@@ -21,7 +21,7 @@ const UserItem = (props) => {
             />
           </div>
           <div className="user-item__info">
-            <h2>{props.name}</h2>
+            <h2 data-test="userNameInfo">{props.name}</h2>
             <h3>
               {props.placeCount.length}{" "}
               {props.placeCount === 1 ? "place" : "places"}

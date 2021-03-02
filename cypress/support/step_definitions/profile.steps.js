@@ -23,6 +23,8 @@ defineStep("User {string} profile is shown", (username) => {
     userName = "TestUser10";
   } else if (username === "four") {
     userName = "TestUser4";
+  } else if (username === "three") {
+    userName = "TestUser3";
   }
   cy.get(seePlacesButton).should("be.visible");
   cy.get(userNameProfile).should("be.visible").contains(userName);

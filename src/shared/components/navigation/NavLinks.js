@@ -21,12 +21,16 @@ const NavLinks = (props) => {
       )}
       {auth.isLoggedIn && (
         <li>
-          <NavLink to={`/places/popular`}>PLACE RANKING</NavLink>
+          <NavLink to={`/places/popular`} data-test="placeRanking">
+            PLACE RANKING
+          </NavLink>
         </li>
       )}
       {auth.isLoggedIn && (
         <li>
-          <NavLink to={`/users/popular`}>USER RANKING</NavLink>
+          <NavLink to={`/users/popular`} data-test="userRanking">
+            USER RANKING
+          </NavLink>
         </li>
       )}
       <li>

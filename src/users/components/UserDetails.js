@@ -41,19 +41,23 @@ const UserDetails = (props) => {
       <div className="place-list center">
         <Card className={"card-user"}>
           <h4>{`Welcome to ${isYou ? "your" : props.name} profile.`}</h4>
-          <small>{` ${isYou ? "You have" : "This user has"} ${
-            props.places.length
-          } ${
+          <small data-test="usersCount">{` ${
+            isYou ? "You have" : "This user has"
+          } ${props.places.length} ${
             props.places.length !== 1 ? "places" : "place"
           } and ${userCount} ${
             userCount !== 1 ? "followers" : "follower"
           }.`}</small>
           <br />
           {!isYou && auth.userId && isFollowed && (
-            <Button onClick={folloHandler}>Unfollow</Button>
+            <Button onClick={folloHandler} dataTest="unfollowButton">
+              Unfollow
+            </Button>
           )}
           {!isYou && auth.userId && !isFollowed && (
-            <Button onClick={folloHandler}>Follow</Button>
+            <Button onClick={folloHandler} dataTest="followButton">
+              Follow
+            </Button>
           )}
           <Button
             inverse

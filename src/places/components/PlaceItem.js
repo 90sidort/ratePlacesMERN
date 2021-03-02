@@ -106,10 +106,10 @@ const PlaceItem = (props) => {
               />
             </div>
             <div className="place-item__info">
-              <h2>{props.title}</h2>
+              <h2 data-test="placeName">{props.title}</h2>
               <h3>{props.address}</h3>
               <p>{props.about}</p>
-              <small>
+              <small data-test="likeCount">
                 {likesCount} {likesCount !== 1 ? "likes" : "like"}
               </small>
             </div>
@@ -119,12 +119,20 @@ const PlaceItem = (props) => {
               VIEW ON MAP
             </Button>
             {auth.userId && isLiked && !isPopular && (
-              <Button like onClick={likeUnlikeHandler}>
+              <Button
+                like
+                onClick={likeUnlikeHandler}
+                dataTest={`${props.title}_unlike`}
+              >
                 Unlike
               </Button>
             )}
             {auth.userId && !isLiked && !isPopular && (
-              <Button unlike onClick={likeUnlikeHandler}>
+              <Button
+                unlike
+                onClick={likeUnlikeHandler}
+                dataTest={`${props.title}_like`}
+              >
                 Like
               </Button>
             )}

@@ -2,7 +2,7 @@
 const cucumber = require("cypress-cucumber-preprocessor").default;
 const seeder = require("cypress-mongo-seeder");
 
-const mongouri = require("../../config");
+const { mongouri } = require("../../src/config");
 
 const folder = "./cypress/fixtures";
 const dropCollections = true;

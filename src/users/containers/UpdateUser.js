@@ -4,7 +4,6 @@ import { useLocation, useHistory } from "react-router-dom";
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
 import {
-  VALIDATOR_REQUIRE,
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
   VALIDATOR_MAXLENGTH,
