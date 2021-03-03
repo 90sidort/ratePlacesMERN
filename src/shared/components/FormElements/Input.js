@@ -75,7 +75,11 @@ const Input = (props) => {
     );
   } else if (props.element === "select") {
     element = (
-      <select onChange={changeHandler} value={inputState.value}>
+      <select
+        onChange={changeHandler}
+        value={inputState.value}
+        data-test={props.dataTest}
+      >
         {props.options.map((opt) => {
           return (
             <option key={opt} value={opt.toLowerCase()}>

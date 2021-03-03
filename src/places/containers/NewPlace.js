@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 
 import {
+  VALIDATOR_MAXLENGTH,
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
 } from "../../shared/utils/validators";
@@ -50,23 +51,28 @@ const NewPlace = () => {
           Authorization: `Bearer ${auth.token}`,
         }
       );
-      history.push("/");
+      history.push(`/${auth.userId}/places`);
     } catch (e) {}
   };
 
   return (
     <React.Fragment>
       <ErrorModal error={isError} onClear={clearError} />
-      <form className="place-form" onSubmit={placeSubmitHandler}>
+      <form
+        className="place-form"
+        onSubmit={placeSubmitHandler}
+        data-test="newPlaceForm"
+      >
         {isLoading && <LoadingSpinner asOverlay />}
         <Input
           id="title"
           type="text"
           label="Title"
           element="input"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid title."
+          validators={[VALIDATOR_MINLENGTH(1), VALIDATOR_MAXLENGTH(300)]}
+          errorText="Please enter a valid title (min. 1 char, max 300)."
           onInput={inputHandler}
+          dataTest="inputTitle"
         />
         <Input
           id="type"
@@ -76,14 +82,16 @@ const NewPlace = () => {
           onInput={inputHandler}
           initialValue="monument"
           validators={""}
+          dataTest="selectType"
         />
         <Input
           id="about"
           label="About"
           element="textarea"
-          validators={[VALIDATOR_MINLENGTH(5)]}
-          errorText="Please enter a short description (at least 5 characters)."
+          validators={[VALIDATOR_MINLENGTH(5), VALIDATOR_MAXLENGTH(1000)]}
+          errorText="Please enter a short description (min. 5 chars, max 1000)."
           onInput={inputHandler}
+          dataTest="inputAbout"
         />
         <Input
           id="address"
@@ -93,6 +101,7 @@ const NewPlace = () => {
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a valid address."
           onInput={inputHandler}
+          dataTest="inputAddress"
         />
         <Input
           id="description"
@@ -100,6 +109,7 @@ const NewPlace = () => {
           element="textarea"
           onInput={inputHandler}
           validators={""}
+          dataTest="inputDescription"
         />
         <ImageUpload
           id="image"
@@ -107,7 +117,11 @@ const NewPlace = () => {
           onInput={inputHandler}
           errorText="Please provide an image."
         />
-        <Button type="submit" disabled={!formState.isValid}>
+        <Button
+          type="submit"
+          disabled={!formState.isValid}
+          dataTest="addPlaceButton"
+        >
           ADD PLACE
         </Button>
       </form>

@@ -1,4 +1,10 @@
 import {
+  placeDescription,
+  placeAbout,
+  placeAddress,
+  placeTest,
+} from "../variables/places.variables";
+import {
   changedAbout,
   changedEmail,
   changedName,
@@ -56,5 +62,13 @@ export const textFinder = (textName) => {
     return changedName;
   } else if (textName === "changed about") {
     return changedAbout;
+  } else if (textName === "correct title") {
+    return placeTest;
+  } else if (textName === "correct about") {
+    return placeAbout;
+  } else if (textName === "correct address") {
+    return placeAddress;
+  } else if (textName === "description") {
+    return placeDescription;
   }
 };

@@ -45,7 +45,7 @@ const NavLinks = (props) => {
       )}
       {auth.isLoggedIn && (
         <li>
-          <NavLink to="/places/new" exact>
+          <NavLink to="/places/new" exact data-test="addPlace">
             ADD PLACE
           </NavLink>
         </li>

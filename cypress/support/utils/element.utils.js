@@ -1,4 +1,11 @@
 import { okayButton } from "../variables/common.variables";
+import {
+  addPlaceButton,
+  inputAddress,
+  inputTitle,
+  addPlaceNav,
+  inputDescription,
+} from "../variables/places.variables";
 
 import {
   archiveProfileButton,
@@ -42,5 +49,15 @@ export const elementFinder = (elementName) => {
     return updateUserButton;
   } else if (elementName === "about input") {
     return inputAbout;
+  } else if (elementName === "add place navigation") {
+    return addPlaceNav;
+  } else if (elementName === "title input") {
+    return inputTitle;
+  } else if (elementName === "address input") {
+    return inputAddress;
+  } else if (elementName === "Add place button") {
+    return addPlaceButton;
+  } else if (elementName === "description input") {
+    return inputDescription;
   }
 };

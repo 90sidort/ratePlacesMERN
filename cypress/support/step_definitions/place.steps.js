@@ -1,4 +1,5 @@
 import { defineStep } from "cypress-cucumber-preprocessor/steps";
+
 import {
   followCount,
   likeCount,
@@ -7,7 +8,11 @@ import {
   unfollowButton,
   unlikePlaceEl,
   userItemCard,
+  addPlaceButton,
+  newPlaceForm,
+  selectType,
 } from "../variables/places.variables";
+
 import { placeNameInfo } from "../variables/ranking.variables";
 
 defineStep("User {string} places are shown", (username) => {
@@ -58,4 +63,25 @@ defineStep("Followers count equals {string}", (num) => {
     .then((text) => {
       expect(text).to.include(`${num} follower`);
     });
+});
+
+defineStep("User creates new place", () => {
+  cy.get(addPlaceButton).should("be.visible").click();
+});
+
+defineStep("Add place form is shown", () => {
+  cy.get(newPlaceForm).should("be.visible");
+});
+
+defineStep("User selects {string} in type select", (option) => {
+  cy.get(selectType).select(option);
+});
+
+defineStep("User places list is shown", () => {
+  cy.get(placeItemCard).should("be.visible");
+  cy.url().should("include", "/places");
+});
+
+defineStep("Place {string} is visible", (placeName) => {
+  cy.get(placeNameInfo).eq(2).should("have.text", placeName);
 });
