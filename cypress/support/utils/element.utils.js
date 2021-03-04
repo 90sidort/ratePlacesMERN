@@ -5,6 +5,12 @@ import {
   inputTitle,
   addPlaceNav,
   inputDescription,
+  getMyPlaces,
+  edit4,
+  updatePlaceButton,
+  viewMap,
+  mapModal,
+  closeMapModal,
 } from "../variables/places.variables";
 
 import {
@@ -59,5 +65,15 @@ export const elementFinder = (elementName) => {
     return addPlaceButton;
   } else if (elementName === "description input") {
     return inputDescription;
+  } else if (elementName === "my places navigation") {
+    return getMyPlaces;
+  } else if (elementName === "edit place 4") {
+    return edit4;
+  } else if (elementName === "Update place button") {
+    return updatePlaceButton;
+  } else if (elementName === "view map button") {
+    return viewMap;
+  } else if (elementName === "close map button") {
+    return closeMapModal;
   }
 };

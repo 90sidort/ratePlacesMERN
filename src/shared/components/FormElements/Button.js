@@ -12,6 +12,7 @@ const Button = (props) => {
           props.inverse && "button--inverse"
         } ${props.danger && "button--danger"} ${props.like && "button--like"} `}
         href={props.href}
+        data-test={props.dataTest}
       >
         {props.children}
       </a>
@@ -25,6 +26,7 @@ const Button = (props) => {
         className={`button button--${props.size || "default"} ${
           props.inverse && "button--inverse"
         } ${props.danger && "button--danger"}`}
+        data-test={props.dataTest}
       >
         {props.children}
       </Link>

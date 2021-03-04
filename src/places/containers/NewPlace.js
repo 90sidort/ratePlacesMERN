@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import {
   VALIDATOR_MAXLENGTH,
   VALIDATOR_MINLENGTH,
-  VALIDATOR_REQUIRE,
 } from "../../shared/utils/validators";
 import Button from "../../shared/components/FormElements/Button";
 import Input from "../../shared/components/FormElements/Input";
@@ -98,8 +97,8 @@ const NewPlace = () => {
           type="text"
           label="Address"
           element="input"
-          validators={[VALIDATOR_REQUIRE()]}
-          errorText="Please enter a valid address."
+          validators={[VALIDATOR_MINLENGTH(1), VALIDATOR_MAXLENGTH(300)]}
+          errorText="Please enter a valid address (min. 1 char, max 300)."
           onInput={inputHandler}
           dataTest="inputAddress"
         />

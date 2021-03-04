@@ -18,7 +18,7 @@ defineStep("User opens app", () => {
 });
 
 defineStep("User clicks {string}", (elementName) => {
-  cy.get(elementFinder(elementName), { timeout: 10000 }).click();
+  cy.get(elementFinder(elementName), { timeout: 10000 }).eq(0).click();
 });
 
 defineStep("{string} page is displayed", (urlName) => {

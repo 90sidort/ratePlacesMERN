@@ -1,4 +1,6 @@
 import { defineStep } from "cypress-cucumber-preprocessor/steps";
+import { elementFinder } from "../utils/element.utils";
+import { textFinder } from "../utils/text.utils";
 
 import {
   followCount,
@@ -11,6 +13,7 @@ import {
   addPlaceButton,
   newPlaceForm,
   selectType,
+  mapModal,
 } from "../variables/places.variables";
 
 import { placeNameInfo } from "../variables/ranking.variables";
@@ -69,7 +72,7 @@ defineStep("User creates new place", () => {
   cy.get(addPlaceButton).should("be.visible").click();
 });
 
-defineStep("Add place form is shown", () => {
+defineStep("{string} place form is shown", (name) => {
   cy.get(newPlaceForm).should("be.visible");
 });
 
@@ -82,6 +85,29 @@ defineStep("User places list is shown", () => {
   cy.url().should("include", "/places");
 });
 
-defineStep("Place {string} is visible", (placeName) => {
-  cy.get(placeNameInfo).eq(2).should("have.text", placeName);
+defineStep("Place {string} is visible {string}", (placeName, num) => {
+  cy.get(placeNameInfo).eq(parseInt(num)).should("have.text", placeName);
+});
+
+defineStep(
+  "User types {string} in {string} - shortcut",
+  (text, elementName) => {
+    cy.get(elementFinder(elementName))
+      .invoke("val", textFinder(text))
+      .trigger("change");
+    cy.get(elementFinder(elementName)).type("a");
+  }
+);
+
+defineStep("Modify buttons are {string}", (state) => {
+  cy.get("a")
+    .contains("EDIT")
+    .should(state === "visible" ? "be.visible" : "not.be.visible");
+  cy.get("button")
+    .contains("DELETE")
+    .should(state === "visible" ? "be.visible" : "not.be.visible");
+});
+
+defineStep("Map modal is {string}", (state) => {
+  cy.get(mapModal).should(state ? "be.visible" : "not.be.visible");
 });

@@ -3,6 +3,10 @@ import {
   placeAbout,
   placeAddress,
   placeTest,
+  placeIncorrectTitle,
+  placeIncorrectAbout,
+  placeIncorrectAddress,
+  errorAddress,
 } from "../variables/places.variables";
 import {
   changedAbout,
@@ -70,5 +74,15 @@ export const textFinder = (textName) => {
     return placeAddress;
   } else if (textName === "description") {
     return placeDescription;
+  } else if (textName === "incorrect title") {
+    return placeIncorrectTitle.repeat(15);
+  } else if (textName === "incorrect about") {
+    return placeIncorrectAbout.repeat(30);
+  } else if (textName === "incorrect address") {
+    return placeIncorrectAddress.repeat(16);
+  } else if (textName === "invalid address") {
+    return placeIncorrectAddress;
+  } else if (textName === "wrong address") {
+    return errorAddress;
   }
 };

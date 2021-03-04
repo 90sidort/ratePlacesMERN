@@ -4,8 +4,8 @@ import { useParams, useHistory } from "react-router-dom";
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
 import {
-  VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH,
+  VALIDATOR_MAXLENGTH,
 } from "../../shared/utils/validators";
 import { useForm } from "../../shared/hooks/form-hook";
 import "./PlaceForm.css";
@@ -115,17 +115,22 @@ const UpdatePlace = () => {
       )}
       <ErrorModal error={isError} onClear={clearError} />
       {!isLoading && fetchedPlace && (
-        <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
+        <form
+          className="place-form"
+          onSubmit={placeUpdateSubmitHandler}
+          data-test="newPlaceForm"
+        >
           <Input
             id="title"
             element="input"
             type="text"
             label="Title"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter a valid title."
-            onInput={inputHandler}
             initialValue={fetchedPlace.title}
             initialValid={true}
+            validators={[VALIDATOR_MINLENGTH(1), VALIDATOR_MAXLENGTH(300)]}
+            errorText="Please enter a valid title (min. 1 char, max 300)."
+            onInput={inputHandler}
+            dataTest="inputTitle"
           />
           <Input
             id="type"
@@ -137,37 +142,41 @@ const UpdatePlace = () => {
             initialValue={fetchedPlace.type}
             initialValid={true}
             validators={""}
+            dataTest="selectType"
           />
           <Input
             id="about"
             label="About"
             element="textarea"
-            validators={[VALIDATOR_MINLENGTH(5)]}
-            errorText="Please enter a short description (at least 5 characters)."
-            onInput={inputHandler}
             initialValue={fetchedPlace.about}
             initialValid={true}
+            validators={[VALIDATOR_MINLENGTH(5), VALIDATOR_MAXLENGTH(1000)]}
+            errorText="Please enter a short description (min. 5 chars, max 1000)."
+            onInput={inputHandler}
+            dataTest="inputAbout"
           />
           <Input
             id="address"
             type="text"
             label="Address"
             element="input"
-            validators={[VALIDATOR_REQUIRE()]}
             initialValue={fetchedPlace.address}
             initialValid={true}
-            errorText="Please enter a valid address."
+            validators={[VALIDATOR_MINLENGTH(1), VALIDATOR_MAXLENGTH(300)]}
+            errorText="Please enter a valid address (min. 1 char, max 300)."
             onInput={inputHandler}
+            dataTest="inputAddress"
           />
           <Input
             id="description"
             label="Description"
             element="textarea"
-            onInput={inputHandler}
             initialValue={fetchedPlace.description}
             initialValid={true}
             errorText="Provide a description if you feel like it."
+            onInput={inputHandler}
             validators={""}
+            dataTest="inputDescription"
           />
           <ImageUpload
             id="image"
@@ -176,7 +185,11 @@ const UpdatePlace = () => {
             onInput={inputHandler}
             errorText="Please provide an image."
           />
-          <Button type="submit" disabled={!formState.isValid}>
+          <Button
+            type="submit"
+            disabled={!formState.isValid}
+            dataTest="updatePlaceButton"
+          >
             UPDATE PLACE
           </Button>
         </form>

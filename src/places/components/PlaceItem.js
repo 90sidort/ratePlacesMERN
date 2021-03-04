@@ -66,9 +66,13 @@ const PlaceItem = (props) => {
           header={props.address}
           contentClass="place-item__modal-content"
           footerClass="place-item__modal-actions"
-          footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
+          footer={
+            <Button onClick={closeMapHandler} dataTest="closeMap">
+              CLOSE
+            </Button>
+          }
         >
-          <div className="map-container">
+          <div className="map-container" data-test="mapModal">
             <MapboxGLMap
               coordinates={[props.coordinates.lat, props.coordinates.lng]}
             />
@@ -115,7 +119,7 @@ const PlaceItem = (props) => {
             </div>
           </Link>
           <div className="place-item__actions">
-            <Button inverse onClick={openMapHandler}>
+            <Button inverse onClick={openMapHandler} dataTest="viewMap">
               VIEW ON MAP
             </Button>
             {auth.userId && isLiked && !isPopular && (
@@ -137,7 +141,12 @@ const PlaceItem = (props) => {
               </Button>
             )}
             {auth.userId === props.creatorId && !isPopular && (
-              <Button to={`/places/${props.id}`}>EDIT</Button>
+              <Button
+                to={`/places/${props.id}`}
+                dataTest={`${props.title}_edit`}
+              >
+                EDIT
+              </Button>
             )}
             {auth.userId === props.creatorId && !isPopular && (
               <Button danger onClick={showModalHandler}>
