@@ -82,7 +82,7 @@ const PlaceDetails = () => {
       <ErrorModal error={isError} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
       <div>
-        <Card className="place-details__content">
+        <Card className="place-details__content" dataTest="placeInfo">
           <h1>{placeDetails.title}</h1>
           <h3>{placeDetails.about}</h3>
           {placeDetails.likes && (
@@ -111,7 +111,7 @@ const PlaceDetails = () => {
             </Button>
           </div>
         </Card>
-        <Card className="place-details__content">
+        <Card className="place-details__content" dataTest="placeMapsDetails">
           {placeDetails.location && (
             <div className="map-container">
               <MapboxGLMap
@@ -123,7 +123,7 @@ const PlaceDetails = () => {
             </div>
           )}
         </Card>
-        <Card className="place-details__content">
+        <Card className="place-details__content" dataTest="placeDescr">
           <p>{placeDetails.description}</p>
         </Card>
         <form className="place-details__form" onSubmit={addCommentHandler}>

@@ -20,6 +20,12 @@ export const edit4 = 'a[data-test="TestPlace4_edit"]';
 export const viewMap = 'button[data-test="viewMap"]';
 export const mapModal = 'div[data-test="mapModal"]';
 export const closeMapModal = 'button[data-test="closeMap"]';
+export const cardDescription = 'div[data-test="placeDescr"]';
+export const cardMaps = 'div[data-test="placeMapsDetails"]';
+export const deletePlace = (placeNum) =>
+  `button[data-test="deletePlace_${placeNum}"]`;
+export const deleteConfrim = 'button[data-test="confirmDelete"]';
+export const cancelConfirm = 'button[data-test="cancelDelete"]';
 
 // Text
 export const placeTest = "Test place";

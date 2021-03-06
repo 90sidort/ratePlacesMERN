@@ -110,16 +110,54 @@ Feature: Places
         When User clicks "close map button"
         Then Map modal is "not visible"
 
-    # Scenario: User reads his place details
-    # Scenario: User reads other user place list
-    # Scenario: User reads other user place details
+    Scenario: User reads his place details
+        Given User "two" is logged in
+        When User clicks "my places navigation"
+        And User selects place "TestPlace4"
+        Then "TestPlace4" details are shown
 
-    # Scenario: User deletes place
+    Scenario: User reads other user place list
+        Given User "two" is logged in
+        When User navigates to user "TestUser10" "places"
+        Then User "ten" places are shown
+        And Modify buttons are "not visible"
+        When User clicks "view map button"
+        Then Map modal is "visible"
+        When User clicks "close map button"
+        Then Map modal is "not visible"
 
-    # Scenario: User likes his own place
-    # Scenario: User unlikes his own place
-    # Scenario: User likes other user place
-    # Scenario: User unlikes other user place
+    Scenario: User reads other user place details
+        Given User "two" is logged in
+        When User navigates to user "TestUser10" "places"
+        And User selects place "TestPlace2"
+        Then "TestPlace2" details are shown
+
+    @seed
+    Scenario: User cancels place deletion
+        Given User "two" is logged in
+        When User clicks "my places navigation"
+        And User clicks delete "TestPlace4"
+        Then Confirm modal is shown
+        When User cancels deletion
+        Then "TestUser2" places are shown
+
+    Scenario: User deletes place
+        Given User "two" is logged in
+        When User clicks "my places navigation"
+        And User clicks delete "TestPlace4"
+        Then Confirm modal is shown
+        When User confirms deletion
+        Then "TestPlace4" is deleted
+
+    @seed
+    Scenario: User likes and unlikes place
+        Given User "two" is logged in
+        When User navigates to user "TestUser4" "places"
+        Then User "four" places are shown
+        When User likes place "TestPlace6"
+        Then Place like count equals "1"
+        When User unlikes place "TestPlace6"
+        Then Place like count equals "0"
 
     # Scenario: User comments place
     # Scenario: User deletes comment from comment details

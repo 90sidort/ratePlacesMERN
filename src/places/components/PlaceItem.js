@@ -85,10 +85,18 @@ const PlaceItem = (props) => {
           footerClass="place-item__modal-actions"
           footer={
             <React.Fragment>
-              <Button inverse onClick={cancelModalHandler}>
+              <Button
+                inverse
+                onClick={cancelModalHandler}
+                dataTest="cancelDelete"
+              >
                 CANCEL
               </Button>
-              <Button danger onClick={deleteModalHandler}>
+              <Button
+                danger
+                onClick={deleteModalHandler}
+                dataTest="confirmDelete"
+              >
                 DELETE
               </Button>
             </React.Fragment>
@@ -149,7 +157,11 @@ const PlaceItem = (props) => {
               </Button>
             )}
             {auth.userId === props.creatorId && !isPopular && (
-              <Button danger onClick={showModalHandler}>
+              <Button
+                danger
+                onClick={showModalHandler}
+                dataTest={`deletePlace_${props.title}`}
+              >
                 DELETE
               </Button>
             )}

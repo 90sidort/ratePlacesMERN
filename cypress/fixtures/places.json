@@ -1,1 +1,120 @@
-[{"_id":{"$oid":"603be5b894562d21031182cf"},"likes":[{"$oid":"603be46194562d21031182ce"},{"$oid":"603be20f94562d21031182c8"},{"$oid":"603be2f894562d21031182ca"},{"$oid":"603be41494562d21031182cd"},{"$oid":"603be34194562d21031182cb"}],"title":"TestPlace1","image":"uploads/images/7e5103a4-45c5-4487-9338-1b1f5780eff6.jpeg","about":"This is a test place number one. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.","type":"site","address":"21 Szczesliwicka, Warsaw, Poland","description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.","creator":{"$oid":"603be46194562d21031182ce"},"location":{"lat":52.21704,"lng":20.972199},"comments":[{"_id":{"$oid":"603bec91de83ce34d163840d"},"text":"Nice please","created":{"$date":"1970-01-01T00:00:00.001Z"},"postedBy":{"$oid":"603be34194562d21031182cb"},"userName":"TestUser5"},{"_id":{"$oid":"603beca4de83ce34d163840e"},"text":"Very nice place, indeed!","created":{"$date":"1970-01-01T00:00:00.001Z"},"postedBy":{"$oid":"603be20f94562d21031182c8"},"userName":"TestUser2"}],"__v":2},{"_id":{"$oid":"603be65294562d21031182d1"},"likes":[{"$oid":"603be46194562d21031182ce"},{"$oid":"603be20f94562d21031182c8"},{"$oid":"603be41494562d21031182cd"}],"title":"TestPlace2","image":"uploads/images/ccc6291f-0f52-43f7-be2d-19aafb45af27.jpeg","about":"This is a test place number two. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.","type":"monument","address":"Wawelska 10, Warsaw, Poland","description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.","creator":{"$oid":"603be46194562d21031182ce"},"location":{"lat":52.216569,"lng":20.995133},"comments":[],"__v":0},{"_id":{"$oid":"603be6ad94562d21031182d2"},"likes":[{"$oid":"603be46194562d21031182ce"},{"$oid":"603be2f894562d21031182ca"}],"title":"TestPlace3","image":"uploads/images/f2e54c62-177e-4417-8e05-d915f86e73b8.jpeg","about":"This is a test place number three. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.","type":"other","address":"Woloska 18, Warszawa, Poland","description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.","creator":{"$oid":"603be46194562d21031182ce"},"location":{"lat":52.182512,"lng":21.00311},"comments":[],"__v":0},{"_id":{"$oid":"603bea92975ce1328e50f435"},"likes":[{"$oid":"603be20f94562d21031182c8"},{"$oid":"603be2f894562d21031182ca"}],"title":"TestPlace4","image":"uploads/images/949c941b-c2ac-4e08-b4d5-fdff4f5b60b9.jpeg","about":"This is a test place number one. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.","type":"event","address":"76 Dabroszyn, Dabroszyn, Poland","description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.","creator":{"$oid":"603be20f94562d21031182c8"},"location":{"lat":52.62082,"lng":14.7052},"comments":[],"__v":0},{"_id":{"$oid":"603beb06975ce1328e50f437"},"likes":[{"$oid":"603be20f94562d21031182c8"},{"$oid":"603be2f894562d21031182ca"}],"title":"TestPlace5","image":"uploads/images/3cf069d9-c61f-4263-aaa5-1dc74367b50a.jpeg","about":"This is a test place number five. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.","type":"event","address":"20 Mariana Langiewicza, Szczecin, Poland","description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.","creator":{"$oid":"603be20f94562d21031182c8"},"location":{"lat":53.422691,"lng":14.541423},"comments":[],"__v":0},{"_id":{"$oid":"603beba9975ce1328e50f438"},"likes":[],"title":"TestPlace6","image":"uploads/images/986046c4-b528-4b6d-9e8c-ffb7957af7e1.jpeg","about":"This is a test place number six. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.","type":"site","address":"Aleje Jerozolimskie 2, Warsaw, Poland","description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.","creator":{"$oid":"603be2f894562d21031182ca"},"location":{"lat":52.18384,"lng":20.896927},"comments":[],"__v":0}]
+[
+  {
+    "_id": { "$oid": "603be5b894562d21031182cf" },
+    "likes": [
+      { "$oid": "603be46194562d21031182ce" },
+      { "$oid": "603be20f94562d21031182c8" },
+      { "$oid": "603be2f894562d21031182ca" },
+      { "$oid": "603be41494562d21031182cd" },
+      { "$oid": "603be34194562d21031182cb" }
+    ],
+    "title": "TestPlace1",
+    "image": "uploads/images/7e5103a4-45c5-4487-9338-1b1f5780eff6.jpeg",
+    "about": "This is a test place number one. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.",
+    "type": "site",
+    "address": "21 Szczesliwicka, Warsaw, Poland",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.",
+    "creator": { "$oid": "603be46194562d21031182ce" },
+    "location": { "lat": 52.21704, "lng": 20.972199 },
+    "comments": [
+      {
+        "_id": { "$oid": "603bec91de83ce34d163840d" },
+        "text": "Nice please",
+        "created": { "$date": "1970-01-01T00:00:00.001Z" },
+        "postedBy": { "$oid": "603be34194562d21031182cb" },
+        "userName": "TestUser5"
+      },
+      {
+        "_id": { "$oid": "603beca4de83ce34d163840e" },
+        "text": "Very nice place, indeed!",
+        "created": { "$date": "1970-01-01T00:00:00.001Z" },
+        "postedBy": { "$oid": "603be20f94562d21031182c8" },
+        "userName": "TestUser2"
+      }
+    ],
+    "__v": 2
+  },
+  {
+    "_id": { "$oid": "603be65294562d21031182d1" },
+    "likes": [
+      { "$oid": "603be46194562d21031182ce" },
+      { "$oid": "603be20f94562d21031182c8" },
+      { "$oid": "603be41494562d21031182cd" }
+    ],
+    "title": "TestPlace2",
+    "image": "uploads/images/ccc6291f-0f52-43f7-be2d-19aafb45af27.jpeg",
+    "about": "This is a test place number two. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.",
+    "type": "monument",
+    "address": "Wawelska 10, Warsaw, Poland",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.",
+    "creator": { "$oid": "603be46194562d21031182ce" },
+    "location": { "lat": 52.216569, "lng": 20.995133 },
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "603be6ad94562d21031182d2" },
+    "likes": [
+      { "$oid": "603be46194562d21031182ce" },
+      { "$oid": "603be2f894562d21031182ca" }
+    ],
+    "title": "TestPlace3",
+    "image": "uploads/images/f2e54c62-177e-4417-8e05-d915f86e73b8.jpeg",
+    "about": "This is a test place number three. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.",
+    "type": "other",
+    "address": "Woloska 18, Warszawa, Poland",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.",
+    "creator": { "$oid": "603be46194562d21031182ce" },
+    "location": { "lat": 52.182512, "lng": 21.00311 },
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "603bea92975ce1328e50f435" },
+    "likes": [
+      { "$oid": "603be20f94562d21031182c8" },
+      { "$oid": "603be2f894562d21031182ca" }
+    ],
+    "title": "TestPlace4",
+    "image": "placeholder",
+    "about": "This is a test place number one. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.",
+    "type": "event",
+    "address": "76 Dabroszyn, Dabroszyn, Poland",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.",
+    "creator": { "$oid": "603be20f94562d21031182c8" },
+    "location": { "lat": 52.62082, "lng": 14.7052 },
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "603beb06975ce1328e50f437" },
+    "likes": [
+      { "$oid": "603be20f94562d21031182c8" },
+      { "$oid": "603be2f894562d21031182ca" }
+    ],
+    "title": "TestPlace5",
+    "image": "uploads/images/3cf069d9-c61f-4263-aaa5-1dc74367b50a.jpeg",
+    "about": "This is a test place number five. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.",
+    "type": "event",
+    "address": "20 Mariana Langiewicza, Szczecin, Poland",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.",
+    "creator": { "$oid": "603be20f94562d21031182c8" },
+    "location": { "lat": 53.422691, "lng": 14.541423 },
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "603beba9975ce1328e50f438" },
+    "likes": [],
+    "title": "TestPlace6",
+    "image": "uploads/images/986046c4-b528-4b6d-9e8c-ffb7957af7e1.jpeg",
+    "about": "This is a test place number six. Pretty cool test place if i'm honest. I would certainly recommend it and will be coming back soon.",
+    "type": "site",
+    "address": "Aleje Jerozolimskie 2, Warsaw, Poland",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis cursus pellentesque. Nunc dapibus augue sit amet luctus pharetra. In hac habitasse platea dictumst. Sed mattis dolor at lacus condimentum condimentum. Integer imperdiet, lorem sit amet ultricies scelerisque, diam est lacinia nisi, a fermentum nunc felis vel lorem. Quisque et odio vitae tellus porttitor aliquet vitae vitae ligula. Etiam nec neque quam. Sed et felis quam.\n\nMauris eu lorem aliquam, bibendum sapien at, tincidunt sapien. Aenean tempus, leo in elementum mollis, diam purus gravida augue, eu egestas nibh augue eu ligula. Nam ac facilisis lacus, nec hendrerit tortor. Nulla ligula ligula, accumsan nec massa et, porta lacinia massa. Duis sit amet dolor ex. Fusce id ligula vel mi cursus iaculis. Sed tempus rhoncus luctus. Suspendisse maximus bibendum odio in efficitur. Etiam et vulputate nulla.",
+    "creator": { "$oid": "603be2f894562d21031182ca" },
+    "location": { "lat": 52.18384, "lng": 20.896927 },
+    "comments": [],
+    "__v": 0
+  }
+]

@@ -14,6 +14,11 @@ import {
   newPlaceForm,
   selectType,
   mapModal,
+  cardDescription,
+  cardMaps,
+  deletePlace,
+  deleteConfrim,
+  cancelConfirm,
 } from "../variables/places.variables";
 
 import { placeNameInfo } from "../variables/ranking.variables";
@@ -24,6 +29,10 @@ defineStep("User {string} places are shown", (username) => {
     placesNum = 2;
   } else if (username === "three") {
     placesNum = 0;
+  } else if (username === "ten") {
+    placesNum = 3;
+  } else if (username === "four") {
+    placesNum = 1;
   }
   cy.get(placeItemCard).should("have.length", placesNum);
 });
@@ -55,7 +64,7 @@ defineStep("Place like count equals {string}", (num) => {
   cy.get(likeCount)
     .eq(0)
     .should("be.visible")
-    .should("have.text", `${num} like`);
+    .should("have.text", `${num} ${num === "1" ? "like" : "likes"}`);
 });
 
 defineStep("Followers count equals {string}", (num) => {
@@ -100,14 +109,53 @@ defineStep(
 );
 
 defineStep("Modify buttons are {string}", (state) => {
+  console.log(state);
   cy.get("a")
     .contains("EDIT")
-    .should(state === "visible" ? "be.visible" : "not.be.visible");
+    .should(state === "visible" ? "be.visible" : "not.exist");
   cy.get("button")
     .contains("DELETE")
-    .should(state === "visible" ? "be.visible" : "not.be.visible");
+    .should(state === "visible" ? "be.visible" : "not.exist");
 });
 
 defineStep("Map modal is {string}", (state) => {
   cy.get(mapModal).should(state ? "be.visible" : "not.be.visible");
+});
+
+defineStep("User selects place {string}", (placeName) => {
+  cy.get(placeNameInfo).should("be.visible").contains(placeName).click();
+});
+
+defineStep("{string} details are shown", (placeName) => {
+  cy.get("h1").eq(1).should("have.text", placeName);
+  cy.get("p").contains("like");
+  cy.get("h3").contains("test place number");
+  cy.get("img").should("have.attr", `alt`, `${placeName}`);
+  cy.get(cardMaps).should("be.visible");
+  cy.get(cardDescription).should("be.visible");
+});
+
+defineStep("User clicks delete {string}", (placeName) => {
+  cy.get(deletePlace(placeName)).should("be.visible").click();
+});
+
+defineStep("Confirm modal is shown", () => {
+  cy.get(deleteConfrim).should("be.visible");
+  cy.get("p").contains("Please confirm deletetion.").should("be.visible");
+});
+
+defineStep("User cancels deletion", () => {
+  cy.get(cancelConfirm).should("be.visible").click();
+});
+
+defineStep("User confirms deletion", () => {
+  cy.get(deleteConfrim).should("be.visible").click();
+});
+
+defineStep("{string} is deleted", (placeName) => {
+  cy.get(placeNameInfo).contains(placeName).should("not.exist");
+});
+
+defineStep("User likes place {string}", (placeName) => {
+  cy.get(likePlaceEl(placeName)).should("be.visible").click();
 });

@@ -43,7 +43,7 @@ defineStep("{string} form error is shown", (errorElement) => {
 });
 
 defineStep("Error modal {string} is shown", (errorType) => {
-  cy.get(modalError).should("be.visible");
+  cy.get(modalError, { timeout: 10000 }).should("be.visible");
   cy.get("p").contains(textFinder(errorType));
 });
 
