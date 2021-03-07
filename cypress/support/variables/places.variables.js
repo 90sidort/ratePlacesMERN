@@ -26,6 +26,10 @@ export const deletePlace = (placeNum) =>
   `button[data-test="deletePlace_${placeNum}"]`;
 export const deleteConfrim = 'button[data-test="confirmDelete"]';
 export const cancelConfirm = 'button[data-test="cancelDelete"]';
+export const addComment = 'input[data-test="addComment"]';
+export const addCommentButton = 'button[data-test="addCommentButton"]';
+export const commentText = 'div[data-test="commentText"]';
+export const deleteComment = 'button[data-test="deleteComment"]';
 
 // Text
 export const placeTest = "Test place";

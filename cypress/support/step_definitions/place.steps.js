@@ -19,6 +19,10 @@ import {
   deletePlace,
   deleteConfrim,
   cancelConfirm,
+  addComment,
+  addCommentButton,
+  commentText,
+  deleteComment,
 } from "../variables/places.variables";
 
 import { placeNameInfo } from "../variables/ranking.variables";
@@ -158,4 +162,24 @@ defineStep("{string} is deleted", (placeName) => {
 
 defineStep("User likes place {string}", (placeName) => {
   cy.get(likePlaceEl(placeName)).should("be.visible").click();
+});
+
+defineStep("User types comment: {string}", (commentText) => {
+  cy.get(addComment).type(commentText);
+});
+
+defineStep("User adds comment", () => {
+  cy.get(addCommentButton).click();
+});
+
+defineStep("Text {string} was added", (text) => {
+  cy.get(commentText).contains(text);
+});
+
+defineStep("User deletes comment", () => {
+  cy.get(deleteComment).click();
+});
+
+defineStep("Comment is no longer shown", () => {
+  cy.get(commentText, { timeout: 10000 }).should("not.exist");
 });

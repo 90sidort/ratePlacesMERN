@@ -159,5 +159,14 @@ Feature: Places
         When User unlikes place "TestPlace6"
         Then Place like count equals "0"
 
-    # Scenario: User comments place
-    # Scenario: User deletes comment from comment details
+    Scenario: User comments and uncomments place
+        Given User "two" is logged in
+        When User navigates to user "TestUser4" "places"
+        Then User "four" places are shown
+        When User selects place "TestPlace6"
+        Then "TestPlace6" details are shown
+        When User types comment: "test_comment_1"
+        And User adds comment
+        Then Text "test_comment_1" was added
+        When User deletes comment
+        Then Comment is no longer shown

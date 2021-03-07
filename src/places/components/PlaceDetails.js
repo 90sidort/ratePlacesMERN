@@ -129,9 +129,18 @@ const PlaceDetails = () => {
         <form className="place-details__form" onSubmit={addCommentHandler}>
           <div className={`form-control`}>
             <label htmlFor="comment">Comment</label>
-            <input id="comment" type="text" onChange={onCommentChangeHandler} />
+            <input
+              id="comment"
+              type="text"
+              onChange={onCommentChangeHandler}
+              data-test="addComment"
+            />
           </div>
-          <Button disabled={commentInput.length === 0} type="submit">
+          <Button
+            disabled={commentInput.length === 0}
+            type="submit"
+            dataTest="addCommentButton"
+          >
             Add comment
           </Button>
         </form>
@@ -139,7 +148,11 @@ const PlaceDetails = () => {
           <div>
             {placeDetails.comments.map((comment) => {
               return (
-                <Card key={comment._id} className="place-details__comment">
+                <Card
+                  key={comment._id}
+                  className="place-details__comment"
+                  dataTest="commentText"
+                >
                   <div>
                     <div style={{ float: "left", width: "95%" }}>
                       <p>
@@ -164,6 +177,7 @@ const PlaceDetails = () => {
                           onClick={() => {
                             delCommentHandler(comment._id);
                           }}
+                          data-test="deleteComment"
                         >
                           X
                         </button>
